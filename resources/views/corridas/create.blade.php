@@ -109,7 +109,7 @@
                     .catch(() => callback("Erro ao buscar localização"));
             }
 
-            // Localização atual
+            // Localização atual (origem)
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(position) {
                     var lat = position.coords.latitude;
@@ -123,13 +123,14 @@
 
                     getAddress(lat, lng, function(endereco) {
                         document.getElementById('origem').value = endereco;
+
+                        // chamar o preview se o destino existir
+                        calcularPreview();
                     });
-                }, function() {
-                    map.setView([-11.2027, 17.8739], 6); // fallback Angola
                 });
             }
 
-            // Clique para destino
+            // Clique no mapa para destino
             map.on("click", function(e) {
                 var lat = e.latlng.lat;
                 var lng = e.latlng.lng;
@@ -145,8 +146,12 @@
 
                 getAddress(lat, lng, function(endereco) {
                     document.getElementById('destino').value = endereco;
+
+                    // Calcula preview automaticamente
+                    calcularPreview();
                 });
             });
+
 
             function toRad(value) {
                 return value * Math.PI / 180;
@@ -181,17 +186,18 @@
 
                 const preco = tarifaBase + (distanciaKm * tarifaKm) + (duracaoMin * tarifaMinuto);
 
+                // Atualiza preview
                 document.getElementById('preview').classList.remove('d-none');
                 document.getElementById('preview_distancia').innerText = distanciaKm.toFixed(2);
                 document.getElementById('preview_duracao').innerText = duracaoMin;
                 document.getElementById('preview_preco').innerText = Math.round(preco);
+
+                // Preencher os campos hidden para salvar no banco
+                document.getElementById('distancia_km').value = distanciaKm.toFixed(2);
+                document.getElementById('duracao_segundos').value = Math.round(duracaoSegundos);
+                document.getElementById('preco').value = Math.round(preco);
             }
 
-            // ⚡ Atualiza preview quando os inputs de coordenadas mudam
-            document.getElementById('origem_lat').addEventListener('change', calcularPreview);
-            document.getElementById('origem_lng').addEventListener('change', calcularPreview);
-            document.getElementById('destino_lat').addEventListener('change', calcularPreview);
-            document.getElementById('destino_lng').addEventListener('change', calcularPreview);
 
         });
     </script>
