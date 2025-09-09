@@ -25,32 +25,74 @@ class CorridaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'origem' => 'required|string',
-            'destino' => 'required|string',
-            'observacoes' => 'nullable|string',
-            'agendado_para' => 'nullable|date',
+            'motorista_id'     => 'required|exists:motoristas,id',
+            'tipo'             => 'required|string',
+            'origem_endereco'  => 'required|string',
+            'destino_endereco' => 'required|string',
+            'origem_lat'       => 'required|numeric',
+            'origem_lng'       => 'required|numeric',
+            'destino_lat'      => 'required|numeric',
+            'destino_lng'      => 'required|numeric',
         ]);
 
-        $corrida = new Corrida();
+        // Cálculo da distância (Haversine)
+        $distanciaKm = $this->haversine(
+            $request->origem_lat,
+            $request->origem_lng,
+            $request->destino_lat,
+            $request->destino_lng
+        );
 
-        $corrida->motorista_id = auth()->id(); // ou selecionado no form
-        $corrida->origem = $request->origem;
-        $corrida->destino = $request->destino;
-        $corrida->observacoes = $request->observacoes;
-        $corrida->agendado_para = $request->agendado_para;
+        // Duração aproximada (velocidade média: 40km/h)
+        $duracaoSegundos = ($distanciaKm / 40) * 3600;
 
-        // Default valores calculáveis
-        $corrida->duracao_segundos = 0; // até calcular a rota
-        $corrida->preco = 500;          // nota mínima permitida
-        $corrida->tarifa_base = 500;    // valor fixo inicial
-        $corrida->tarifa_km = 150;      // exemplo, 150 kz/km
-        $corrida->tarifa_minuto = 50;   // exemplo, 50 kz/min
-        $corrida->estado = 'pendente';  // estados: pendente, em_andamento, concluida
+        // Tarifas fixas (pode vir do request ou config)
+        $tarifaBase = 500;
+        $tarifaKm = 150;
+        $tarifaMinuto = 50;
 
-        $corrida->save();
+        // Preço = tarifa base + (distância * tarifa_km) + (minutos * tarifa_minuto)
+        $preco = $tarifaBase + ($distanciaKm * $tarifaKm) + (($duracaoSegundos / 60) * $tarifaMinuto);
+
+        // Cria corrida
+        Corrida::create([
+            'usuario_id'       => Auth::id(),
+            'motorista_id'     => $request->motorista_id,
+            'tipo'             => $request->tipo,
+            'origem_endereco'  => $request->origem_endereco,
+            'destino_endereco' => $request->destino_endereco,
+            'origem_lat'       => $request->origem_lat,
+            'origem_lng'       => $request->origem_lng,
+            'destino_lat'      => $request->destino_lat,
+            'destino_lng'      => $request->destino_lng,
+            'observacoes'      => $request->observacoes,
+            'agendado_para'    => $request->agendado_para,
+            'distancia_km'     => $distanciaKm,
+            'duracao_segundos' => round($duracaoSegundos),
+            'tarifa_base'      => $tarifaBase,
+            'tarifa_km'        => $tarifaKm,
+            'tarifa_minuto'    => $tarifaMinuto,
+            'preco'            => round($preco),
+            'estado'           => 'pendente',
+        ]);
 
         return redirect()->route('corridas.index')->with('success', 'Corrida criada com sucesso!');
     }
+
+    private function haversine($lat1, $lon1, $lat2, $lon2)
+    {
+        $earthRadius = 6371; // km
+        $dLat = deg2rad($lat2 - $lat1);
+        $dLon = deg2rad($lon2 - $lon1);
+
+        $a = sin($dLat / 2) * sin($dLat / 2) +
+            cos(deg2rad($lat1)) * cos(deg2rad($lat2)) *
+            sin($dLon / 2) * sin($dLon / 2);
+
+        $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+        return $earthRadius * $c;
+    }
+
 
 
 
@@ -96,4 +138,6 @@ class CorridaController extends Controller
         $corrida->delete();
         return redirect()->route('corridas.index')->with('success', 'Corrida excluída com sucesso!');
     }
+
+
 }
