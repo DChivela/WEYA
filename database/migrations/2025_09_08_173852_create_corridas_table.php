@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('corridas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('usuario_id')->index();
+
             $table->unsignedBigInteger('motorista_id')->nullable()->index();
             $table->string('tipo', 30)->default('regular'); // regular, pacote, compartilhada
             // origem
@@ -40,7 +40,8 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('usuario_id')->references('id')->on('usuarios')->onDelete('cascade');
+            // Chaves Estrangeiras
+            $table->foreignId('usuario_id')->constrained('users')->onDelete('cascade');
             $table->foreign('motorista_id')->references('id')->on('motoristas')->onDelete('set null');
         });
     }

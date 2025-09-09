@@ -9,5 +9,5 @@ class Bonus extends Model
     protected $fillable = ['usuario_id','tipo','valor','descricao','expira_em'];
     protected $casts = ['expira_em' => 'datetime'];
 
-    public function usuario(){ return $this->belongsTo(Usuario::class); }
+    public function user(){ return $this->belongsTo(User::class); }
 }

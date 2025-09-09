@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('descricao')->nullable();
             $table->timestamp('expira_em')->nullable();
             $table->timestamps();
-            $table->foreign('usuario_id')->references('id')->on('usuarios')->onDelete('cascade');
+            $table->foreign('usuario_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

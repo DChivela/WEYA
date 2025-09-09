@@ -19,7 +19,11 @@ class Corrida extends Model
     ];
     protected $dates = ['agendado_para','iniciada_em','finalizada_em'];
 
-    public function usuario(){ return $this->belongsTo(Usuario::class, 'usuario_id'); }
+       // Corrida.php
+    public function usuario()
+    {
+        return $this->belongsTo(User::class, 'usuario_id');
+    }
     public function motorista(){ return $this->belongsTo(Motorista::class, 'motorista_id'); }
 
     // método utilitário para calcular preço aproximado
