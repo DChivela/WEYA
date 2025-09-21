@@ -93,7 +93,7 @@
                             <label class="block text-sm font-medium">Atualizar Foto</label>
                             <input type="file" name="foto" accept="image/*" class="w-full border rounded p-2">
                         </div>
-                        <button type="submit" class="btn btn-primary">Atualizar</button>
+                        <button type="submit" class="btn btn-second bg-sky-600 rounded-md py-2 hover:bg-green-600 hover:text-lg">Atualizar</button>
                 </form>
 
             </div>

@@ -29,7 +29,12 @@
             <select id="perfil" name="perfil" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm">
                 <option value="turista" {{ old('perfil') == 'turista' ? 'selected' : '' }}>Turista</option>
                 <option value="motorista" {{ old('perfil') == 'motorista' ? 'selected' : '' }}>Motorista</option>
-                <option value="admin" {{ old('perfil') == 'admin' ? 'selected' : '' }}>Administrador</option>
+                @auth
+                @if(auth()->user()->perfil === 'admin')
+                <option value="admin" {{ old('perfil', $user->perfil ?? '') == 'admin' ? 'selected' : '' }}>Administrador</option>
+                @endif
+                @endauth
+
             </select>
             <x-input-error :messages="$errors->get('perfil')" class="mt-2" />
         </div>

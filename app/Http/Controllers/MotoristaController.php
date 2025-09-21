@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Motorista;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 class MotoristaController extends Controller
 {
@@ -45,8 +46,14 @@ class MotoristaController extends Controller
 
     public function show(Motorista $motorista)
     {
-        return view('motoristas.show', compact('motorista'));
+        $idade = $motorista->data_nascimento
+            ? Carbon::parse($motorista->data_nascimento)->age
+            : null;
+
+        return view('motoristas.show', compact('motorista', 'idade'));
     }
+
+
 
     public function edit(Motorista $motorista)
     {

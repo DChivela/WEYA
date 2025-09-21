@@ -13,13 +13,13 @@
                 <div class="flex items-center space-x-6">
                     <div>
                         @if($motorista->foto)
-                            <img src="{{ asset('storage/' . $motorista->foto) }}"
-                                 alt="Foto do motorista"
-                                 class="h-28 w-28 rounded-full object-cover border-2 border-gray-300 dark:border-gray-600">
+                        <img src="{{ asset('storage/' . $motorista->foto) }}"
+                            alt="Foto do motorista"
+                            class="h-28 w-28 rounded-full object-cover border-2 border-gray-300 dark:border-gray-600">
                         @else
-                            <div class="h-28 w-28 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-500">
-                                Sem foto
-                            </div>
+                        <div class="h-28 w-28 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-500">
+                            Sem foto
+                        </div>
                         @endif
                     </div>
                     <div>
@@ -46,10 +46,13 @@
                                 : 'Não informado' }}
                         </p>
                     </div>
-                    <div>
-                        <p class="font-semibold">Idade:</p>
-                        <p>{{ $motorista->idade ? $motorista->idade . ' anos' : 'Não informado' }}</p>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium">Idade</label>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            {{ $idade ? $idade . ' anos' : 'Não informado' }}
+                        </p>
                     </div>
+
                 </div>
 
                 {{-- Informações do veículo --}}
@@ -76,23 +79,23 @@
                     <h4 class="text-lg font-semibold mb-2">Avaliação</h4>
                     <p>
                         @if($motorista->avaliacao_media)
-                            @for ($i = 0; $i < $motorista->avaliacao_media; $i++)
-                                ⭐
+                        @for ($i = 0; $i < $motorista->avaliacao_media; $i++)
+                            ⭐
                             @endfor
-                        @else
+                            @else
                             <span class="text-gray-500">Sem avaliação</span>
-                        @endif
+                            @endif
                     </p>
                 </div>
 
                 {{-- Ações --}}
                 <div class="mt-8 flex space-x-4">
                     <a href="{{ route('motoristas.edit', $motorista) }}"
-                       class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+                        class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
                         Editar
                     </a>
                     <a href="{{ route('motoristas.index') }}"
-                       class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">
+                        class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">
                         Voltar
                     </a>
                 </div>

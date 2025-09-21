@@ -43,16 +43,21 @@
         <!-- Perfil -->
         <div>
             <x-input-label for="perfil" :value="__('Perfil')" />
-            <select id="perfil" name="perfil" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                <option value="turista" {{ $user->perfil == 'turista' ? 'selected' : '' }}>Turista</option>
-                <option value="motorista" {{ $user->perfil == 'motorista' ? 'selected' : '' }}>Motorista</option>
-
-                @if (auth()->user()->perfil === 'admin')
-                <option value="admin" {{ $user->perfil == 'admin' ? 'selected' : '' }}>Administrador</option>
+            <select id="perfil" name="perfil" class="mt-1 block w-full ...">
+                <option value="turista" {{ old('perfil', $user->perfil ?? '') == 'turista' ? 'selected' : '' }}>Turista</option>
+                <option value="motorista" {{ old('perfil', $user->perfil ?? '') == 'motorista' ? 'selected' : '' }}>Motorista</option>
+                @auth
+                @if(auth()->user()->perfil === 'admin')
+                <option value="admin" {{ old('perfil', $user->perfil ?? '') == 'admin' ? 'selected' : '' }}>Administrador</option>
                 @endif
+                @endauth
+
+
             </select>
             <x-input-error class="mt-2" :messages="$errors->get('perfil')" />
         </div>
+
+
 
 
         <!-- Crédito -->
