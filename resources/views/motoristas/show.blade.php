@@ -24,7 +24,7 @@
                     </div>
                     <div>
                         <h3 class="text-2xl font-bold">{{ $motorista->nome }}</h3>
-                        <p class="text-gray-500 dark:text-gray-400">Motorista cadastrado</p>
+                        <p class="text-gray-500 dark:text-gray-400">Motorista cadastrado <i class="bi bi-patch-check-fill"></i></p>
                     </div>
                 </div>
 

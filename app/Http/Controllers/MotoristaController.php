@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Motorista;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MotoristaController extends Controller
 {
@@ -20,14 +21,24 @@ class MotoristaController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->all();
+        $validated = $request->validate([
+            'nome' => 'required|string|max:255',
+            'telefone' => 'required|string|max:20',
+            'email' => 'nullable|email|max:255',
+            'numero_cnh' => 'required|string|max:50',
+            'veiculo_marca' => 'required|string|max:100',
+            'veiculo_modelo' => 'required|string|max:100',
+            'veiculo_placa' => 'required|string|max:20',
+            'data_nascimento' => 'nullable|date',
+            'avaliacao_media' => 'nullable|integer|min:1|max:5',
+            'foto' => 'nullable|image|max:2048',
+        ]);
 
-        // Upload da foto
         if ($request->hasFile('foto')) {
-            $data['foto'] = $request->file('foto')->store('motoristas', 'public');
+            $validated['foto'] = $request->file('foto')->store('motoristas', 'public');
         }
 
-        Motorista::create($data);
+        Motorista::create($validated);
 
         return redirect()->route('motoristas.index')->with('success', 'Motorista criado com sucesso.');
     }
@@ -44,20 +55,40 @@ class MotoristaController extends Controller
 
     public function update(Request $request, Motorista $motorista)
     {
-        $data = $request->all();
+        $validated = $request->validate([
+            'nome' => 'required|string|max:255',
+            'telefone' => 'required|string|max:20',
+            'email' => 'nullable|email|max:255',
+            'numero_cnh' => 'required|string|max:50',
+            'veiculo_marca' => 'required|string|max:100',
+            'veiculo_modelo' => 'required|string|max:100',
+            'veiculo_placa' => 'required|string|max:20',
+            'data_nascimento' => 'nullable|date',
+            'avaliacao_media' => 'nullable|integer|min:1|max:5',
+            'foto' => 'nullable|image|max:2048',
+        ]);
 
         if ($request->hasFile('foto')) {
-            $data['foto'] = $request->file('foto')->store('motoristas', 'public');
+            if ($motorista->foto) {
+                Storage::delete('public/' . $motorista->foto);
+            }
+
+            $validated['foto'] = $request->file('foto')->store('motoristas', 'public');
         }
 
-        $motorista->update($data);
+        $motorista->update($validated);
 
         return redirect()->route('motoristas.index')->with('success', 'Motorista atualizado com sucesso.');
     }
 
     public function destroy(Motorista $motorista)
     {
+        if ($motorista->foto) {
+            Storage::delete('public/' . $motorista->foto);
+        }
+
         $motorista->delete();
+
         return redirect()->route('motoristas.index')->with('success', 'Motorista excluído com sucesso.');
     }
 }

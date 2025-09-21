@@ -24,6 +24,12 @@ class ProfileUpdateRequest extends FormRequest
                 'email',
                 'max:255',
                 Rule::unique(User::class)->ignore($this->user()->id),
+
+                'cell' => ['required', 'string', 'max:20'],
+                'perfil' => ['required', Rule::in(['cliente', 'agente', 'admin'])],
+                'credito' => ['nullable', 'numeric'],
+                'meta' => ['nullable', 'string', 'max:255'],
+
             ],
         ];
     }
