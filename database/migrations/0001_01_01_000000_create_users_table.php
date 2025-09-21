@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('cell')->nullable()->index();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('perfil', ['usuario', 'admin'])->default('usuario'); // perfil do sistema
+            $table->enum('perfil', ['turista','motorista', 'admin'])->default('turista'); // perfil do sistema
             $table->decimal('credito', 10, 2)->default(0); // saldo/balanco
             $table->json('meta')->nullable(); // dados adicionais flexíveis
             $table->rememberToken();

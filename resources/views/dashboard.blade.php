@@ -9,8 +9,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-8">
 
             {{-- Banner de boas-vindas --}}
-            <div class="bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 text-white rounded-xl shadow-lg p-8">
-                <h3 class="text-3xl font-bold mb-2">Olá, {{ Auth::user()->name ?? 'Visitante' }} 👋</h3>
+<div class="bg-gradient-to-r from-[#1f1f1f] via-[#404722] to-[#d4af37] text-white rounded-xl shadow-lg p-8">
+
+                <h3 class="text-3xl font-bold mb-2">Olá, {{ Auth::user()->name ?? 'Visitante' }}</h3>
                 <p class="text-lg">Explora a cidade com conforto e segurança. O teu motorista está a apenas um clique de distância.</p>
             </div>
 

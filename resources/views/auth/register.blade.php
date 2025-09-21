@@ -16,14 +16,48 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
+        <!-- Telefone -->
+        <div class="mt-4">
+            <x-input-label for="cell" :value="__('Cell')" />
+            <x-text-input id="cell" class="block mt-1 w-full" type="text" name="cell" :value="old('cell')" required />
+            <x-input-error :messages="$errors->get('cell')" class="mt-2" />
+        </div>
+
+        <!-- Perfil -->
+        <div class="mt-4">
+            <x-input-label for="perfil" :value="__('Perfil')" />
+            <select id="perfil" name="perfil" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm">
+                <option value="turista" {{ old('perfil') == 'turista' ? 'selected' : '' }}>Turista</option>
+                <option value="motorista" {{ old('perfil') == 'motorista' ? 'selected' : '' }}>Motorista</option>
+                <option value="admin" {{ old('perfil') == 'admin' ? 'selected' : '' }}>Administrador</option>
+            </select>
+            <x-input-error :messages="$errors->get('perfil')" class="mt-2" />
+        </div>
+
+
+        <!-- Crédito -->
+        <div class="mt-4">
+            <x-input-label for="credito" :value="__('Crédito')" />
+            <x-text-input id="credito" class="block mt-1 w-full" type="number" name="credito" :value="old('credito')" />
+            <x-input-error :messages="$errors->get('credito')" class="mt-2" />
+        </div>
+
+        <!-- Meta -->
+        <div class="mt-4">
+            <x-input-label for="meta" :value="__('Meta')" />
+            <x-text-input id="meta" class="block mt-1 w-full" type="text" name="meta" :value="old('meta')" />
+            <x-input-error :messages="$errors->get('meta')" class="mt-2" />
+        </div>
+
+
         <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
 
             <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
+                type="password"
+                name="password"
+                required autocomplete="new-password" />
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
@@ -33,8 +67,8 @@
             <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
 
             <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
+                type="password"
+                name="password_confirmation" required autocomplete="new-password" />
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
