@@ -20,7 +20,15 @@ class MotoristaController extends Controller
 
     public function store(Request $request)
     {
-        Motorista::create($request->all());
+        $data = $request->all();
+
+        // Upload da foto
+        if ($request->hasFile('foto')) {
+            $data['foto'] = $request->file('foto')->store('motoristas', 'public');
+        }
+
+        Motorista::create($data);
+
         return redirect()->route('motoristas.index')->with('success', 'Motorista criado com sucesso.');
     }
 
@@ -36,7 +44,14 @@ class MotoristaController extends Controller
 
     public function update(Request $request, Motorista $motorista)
     {
-        $motorista->update($request->all());
+        $data = $request->all();
+
+        if ($request->hasFile('foto')) {
+            $data['foto'] = $request->file('foto')->store('motoristas', 'public');
+        }
+
+        $motorista->update($data);
+
         return redirect()->route('motoristas.index')->with('success', 'Motorista atualizado com sucesso.');
     }
 

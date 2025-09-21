@@ -9,8 +9,8 @@
                         {{-- <img src="{{ asset('assets/logo/logo_192.png') }}"
                         alt="Logo"
                         class="block h-9 w-auto">--}}
-                        <img src="{{ asset('assets/logo/logo_192.png') }}" class="block h-9 w-auto dark:hidden" alt="Logo claro">
-                        <img src="{{ asset('assets/logo/logo_192.png') }}" class="hidden h-9 w-auto dark:block" alt="Logo escuro">
+                        <img src="{{ asset('assets/logo/Logo_Vakwetu.png') }}" class="block h-14 w-auto dark:hidden" alt="Logo claro">
+                        <img src="{{ asset('assets/logo/Logo_Vakwetu.png') }}" class="hidden h-14 w-auto dark:block" alt="Logo escuro">
 
                     </a>
                 </div>

@@ -22,6 +22,8 @@
                             <th class="px-4 py-2">Origem</th>
                             <th class="px-4 py-2">Destino</th>
                             <th class="px-4 py-2">Data</th>
+                            <th class="px-4 py-2">Preço</th>
+                            <th class="px-4 py-2">Motorista</th>
                             <th class="px-4 py-2">Autor</th>
                             <th class="px-4 py-2">Ações</th>
                         </tr>
@@ -30,19 +32,24 @@
                         @foreach ($corridas as $corrida)
                             <tr class="border-b dark:border-gray-700">
                                 <td class="px-4 py-2">{{ $corrida->id }}</td>
-                                <td class="px-4 py-2">{{ $corrida->origem }}</td>
-                                <td class="px-4 py-2">{{ $corrida->destino }}</td>
-                                <td class="px-4 py-2">{{ $corrida->data }}</td>
+                                <td class="px-4 py-2">{{ $corrida->origem_endereco ?? '--' }}</td>
+                                <td class="px-4 py-2">{{ $corrida->destino_endereco ?? '--' }}</td>
+                                <td class="px-4 py-2">{{ $corrida->agendado_para ?? '--' }}</td>
+                                <td class="px-4 py-2">{{ $corrida->preco ?? '--' }}</td>
+                                {{-- @foreach ($motoristas as $motorista ) --}}
+                                <td class="px-4 py-2">{{ $corrida->motorista->nome ?? 'Sem motorista' }}</td>
+                                {{-- @endforeach --}}
+
                                 <td>{{ $corrida->usuario->name }}</td>
                                 <td class="px-4 py-2">
                                     <a href="{{ route('corridas.edit', $corrida) }}"
-                                       class="text-blue-600 hover:underline">Editar</a>
+                                       class="text-blue-600 hover:underline"><i class="bi bi-pencil"></i></a>
                                     <form action="{{ route('corridas.destroy', $corrida) }}"
                                           method="POST" class="inline">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="text-red-600 hover:underline ml-2">
-                                            Excluir
+                                            <i class="bi bi-trash"></i>
                                         </button>
                                     </form>
                                 </td>
