@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\PacoteTuristico;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PacoteTuristicoController extends Controller
 {
     public function index()
     {
-        $pacotes = PacoteTuristico::paginate(15);
+        $pacotes = PacoteTuristico::orderBy('created_at', 'desc')->paginate(15);
         return view('pacotes.index', compact('pacotes'));
     }
 
@@ -20,7 +21,27 @@ class PacoteTuristicoController extends Controller
 
     public function store(Request $request)
     {
-        PacoteTuristico::create($request->all());
+        $validated = $request->validate([
+            'nome'          => 'required|string|max:255',
+            'descricao'     => 'nullable|string',
+            'preco'         => 'required|numeric|min:0',
+            'duracao_dias'  => 'required|integer|min:1',
+            'local_partida' => 'required|string|max:255',
+            'itinerario'    => 'nullable|array',
+            'vagas'         => 'required|integer|min:1',
+            'ativo'         => 'nullable|boolean',
+            'foto' => 'nullable|image|array',
+        ]);
+
+        // Garantir que "ativo" é boolean
+        $validated['ativo'] = $request->has('ativo');
+
+        if ($request->hasFile('foto')) {
+            $validated['foto'] = $request->file('fotos')->store('pacotes', 'public');
+        }
+
+        PacoteTuristico::create($validated);
+
         return redirect()->route('pacotes.index')->with('success', 'Pacote criado com sucesso.');
     }
 
@@ -36,13 +57,35 @@ class PacoteTuristicoController extends Controller
 
     public function update(Request $request, PacoteTuristico $pacote)
     {
-        $pacote->update($request->all());
+        $validated = $request->validate([
+            'nome'          => 'required|string|max:255',
+            'descricao'     => 'nullable|string',
+            'preco'         => 'required|numeric|min:0',
+            'duracao_dias'  => 'required|integer|min:1',
+            'local_partida' => 'required|string|max:255',
+            'itinerario'    => 'nullable|array',
+            'vagas'         => 'required|integer|min:1',
+            'ativo'         => 'nullable|boolean',
+            'foto' => 'nullable|image|array',
+        ]);
+
+        $validated['ativo'] = $request->has('ativo');
+
+        if ($request->hasFile('foto')) {
+            $validated['foto'] = $request->file('fotos')->store('pacotes', 'public');
+        }
+
+        $pacote->update($validated);
+
         return redirect()->route('pacotes.index')->with('success', 'Pacote atualizado com sucesso.');
     }
 
     public function destroy(PacoteTuristico $pacote)
     {
-        $pacote->delete();
+        if ($pacote->foto) {
+            Storage::delete('public/' . $pacote->foto);
+        }
+        $pacote->delete(); // SoftDelete
         return redirect()->route('pacotes.index')->with('success', 'Pacote excluído com sucesso.');
     }
 }

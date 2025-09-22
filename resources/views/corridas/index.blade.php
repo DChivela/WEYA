@@ -7,13 +7,14 @@
 
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="flex justify-start mb-4">
+                <a href="{{ route('corridas.create') }}"
+                    class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">
+                    Nova Corrida
+                </a>
+            </div>
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
-                <div class="flex justify-end mb-4">
-                    <a href="{{ route('corridas.create') }}"
-                       class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">
-                        Nova Corrida
-                    </a>
-                </div>
+
 
                 <table class="w-full text-left border-collapse">
                     <thead>
@@ -30,30 +31,30 @@
                     </thead>
                     <tbody>
                         @foreach ($corridas as $corrida)
-                            <tr class="border-b dark:border-gray-700">
-                                <td class="px-4 py-2">{{ $corrida->id }}</td>
-                                <td class="px-4 py-2">{{ $corrida->origem_endereco ?? '--' }}</td>
-                                <td class="px-4 py-2">{{ $corrida->destino_endereco ?? '--' }}</td>
-                                <td class="px-4 py-2">{{ $corrida->agendado_para ?? '--' }}</td>
-                                <td class="px-4 py-2">{{ $corrida->preco ?? '--' }}</td>
-                                {{-- @foreach ($motoristas as $motorista ) --}}
-                                <td class="px-4 py-2">{{ $corrida->motorista->nome ?? 'Sem motorista' }}</td>
-                                {{-- @endforeach --}}
+                        <tr class="border-b dark:border-gray-700">
+                            <td class="px-4 py-2">{{ $corrida->id }}</td>
+                            <td class="px-4 py-2">{{ $corrida->origem_endereco ?? '--' }}</td>
+                            <td class="px-4 py-2">{{ $corrida->destino_endereco ?? '--' }}</td>
+                            <td class="px-4 py-2">{{ $corrida->agendado_para ?? '--' }}</td>
+                            <td class="px-4 py-2">{{ $corrida->preco ?? '--' }}</td>
+                            {{-- @foreach ($motoristas as $motorista ) --}}
+                            <td class="px-4 py-2">{{ $corrida->motorista->nome ?? 'Sem motorista' }}</td>
+                            {{-- @endforeach --}}
 
-                                <td>{{ $corrida->usuario->name }}</td>
-                                <td class="px-4 py-2">
-                                    <a href="{{ route('corridas.edit', $corrida) }}"
-                                       class="text-blue-600 hover:underline"><i class="bi bi-pencil"></i></a>
-                                    <form action="{{ route('corridas.destroy', $corrida) }}"
-                                          method="POST" class="inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="text-red-600 hover:underline ml-2">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
+                            <td>{{ $corrida->usuario->name }}</td>
+                            <td class="px-4 py-2">
+                                <a href="{{ route('corridas.edit', $corrida) }}"
+                                    class="text-blue-600 hover:underline"><i class="bi bi-pencil"></i></a>
+                                <form action="{{ route('corridas.destroy', $corrida) }}"
+                                    method="POST" class="inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-600 hover:underline ml-2">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
                         @endforeach
                     </tbody>
                 </table>

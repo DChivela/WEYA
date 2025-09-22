@@ -7,10 +7,11 @@
 
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <a href="{{ route('motoristas.create') }}" class="mb-4 inline-block bg-blue-600 text-white px-4 py-2 rounded">Novo Motorista</a>
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
-                    <a href="{{ route('motoristas.create') }}" class="btn btn-primary mb-3">Novo Motorista</a>
+
 
                     <table class="min-w-full border-collapse">
                         <thead>
@@ -77,6 +78,8 @@
                                 <td class="px-4 py-2">
                                     <a href="{{ route('motoristas.show', $motorista) }}"
                                     class="text-green-600 hover:underline"><i class="bi bi-eye"></i> </a>
+
+                                    @if(auth()->user()->perfil === 'admin')
                                     <a href="{{ route('motoristas.edit', $motorista) }}"
                                         class="text-blue-600 hover:underline"><i class="bi bi-pencil"></i></a>
                                     <form action="{{ route('motoristas.destroy', $motorista) }}"
@@ -88,6 +91,8 @@
                                             <i class="bi bi-trash-fill"></i>
                                         </button>
                                     </form>
+                                    @endif
+
                                 </td>
                             </tr>
                             @endforeach
