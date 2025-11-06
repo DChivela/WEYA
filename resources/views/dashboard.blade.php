@@ -35,7 +35,7 @@
                     <div class="text-yellow-500 text-3xl mb-3">🗺️</div>
                     <h4 class="font-semibold text-lg">Descobre a Cidade</h4>
                     <p class="text-gray-500 dark:text-gray-400 text-sm">Sugestões de pontos turísticos e locais imperdíveis.</p>
-                    <a href="#" class="mt-3 inline-block text-yellow-600 hover:underline">Explorar</a>
+                    <a href="{{ route('pacotes.index') }}" class="mt-3 inline-block text-yellow-600 hover:underline">Explorar</a>
                 </div>
             </div>
 

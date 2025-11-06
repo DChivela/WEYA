@@ -24,8 +24,8 @@ class User extends Authenticatable
         'password',
         'cell',
         'perfil',
-        'credito',
-        'meta'
+        // 'credito',
+        // 'meta'
     ];
 
     /**

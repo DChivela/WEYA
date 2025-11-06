@@ -28,7 +28,7 @@
             <x-input-label for="perfil" :value="__('Perfil')" />
             <select id="perfil" name="perfil" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm">
                 <option value="turista" {{ old('perfil') == 'turista' ? 'selected' : '' }}>Turista</option>
-                <option value="motorista" {{ old('perfil') == 'motorista' ? 'selected' : '' }}>Motorista</option>
+
                 @auth
                 @if(auth()->user()->perfil === 'admin')
                 <option value="admin" {{ old('perfil', $user->perfil ?? '') == 'admin' ? 'selected' : '' }}>Administrador</option>
@@ -37,21 +37,6 @@
 
             </select>
             <x-input-error :messages="$errors->get('perfil')" class="mt-2" />
-        </div>
-
-
-        <!-- Crédito -->
-        <div class="mt-4">
-            <x-input-label for="credito" :value="__('Crédito')" />
-            <x-text-input id="credito" class="block mt-1 w-full" type="number" name="credito" :value="old('credito')" />
-            <x-input-error :messages="$errors->get('credito')" class="mt-2" />
-        </div>
-
-        <!-- Meta -->
-        <div class="mt-4">
-            <x-input-label for="meta" :value="__('Meta')" />
-            <x-text-input id="meta" class="block mt-1 w-full" type="text" name="meta" :value="old('meta')" />
-            <x-input-error :messages="$errors->get('meta')" class="mt-2" />
         </div>
 
 
@@ -80,11 +65,11 @@
 
         <div class="flex items-center justify-end mt-4">
             <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
+                {{ __('Já existe?') }}
             </a>
 
             <x-primary-button class="ms-4">
-                {{ __('Register') }}
+                {{ __('Registar') }}
             </x-primary-button>
         </div>
     </form>

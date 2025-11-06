@@ -10,22 +10,38 @@
             <div class="bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg p-6">
                 <h3 class="text-lg font-bold">{{ $pacote->nome }}</h3>
                 <p class="mt-2">{{ $pacote->descricao }}</p>
-                <p class="mt-2"><strong>Preço:</strong> {{ number_format($pacote->preco, 2, ',', '.') }} Kz</p>
                 <p><strong>Duração:</strong> {{ $pacote->duracao_dias }} dias</p>
                 <p><strong>Local de Partida:</strong> {{ $pacote->local_partida }}</p>
                 <p><strong>Vagas:</strong> {{ $pacote->vagas }}</p>
                 <p><strong>Ativo:</strong> {{ $pacote->ativo ? 'Sim' : 'Não' }}</p>
 
                 @if($pacote->itinerario)
-                    <div class="mt-4">
-                        <strong>Itinerário:</strong>
-                        <ul class="list-disc list-inside">
-                            @foreach($pacote->itinerario as $etapa)
-                                <li>{{ $etapa }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
+                <div class="mt-4">
+                    <strong>Itinerário:</strong>
+                    <ul class="list-disc list-inside">
+                        @foreach($pacote->itinerario as $etapa)
+                        <li>{{ $etapa }}</li>
+                        @endforeach
+                    </ul>
+                </div>
                 @endif
+
+                <p class="mt-2"><strong>Preço:</strong> {{ number_format($pacote->preco, 2, ',', '.') }} Kz</p>
+
+
+                {{-- Fotos --}}
+                @if(!empty($pacote->fotos))
+                <div class="mt-6">
+                    <strong>Fotos do Pacote:</strong>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-2">
+                        @foreach($pacote->fotos as $foto)
+                        <img src="{{ asset('storage/' . $foto) }}" alt="Foto do pacote"
+                            class="w-full h-40 object-cover rounded border">
+                        @endforeach
+                    </div>
+                </div>
+                @endif
+
             </div>
         </div>
     </div>

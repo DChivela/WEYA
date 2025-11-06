@@ -22,11 +22,15 @@
                     </x-nav-link>
                 </div>
                 <x-nav-link :href="route('corridas.index')" :active="request()->routeIs('corridas.*')">
-                    {{ __('Corridas') }}
+                    {{ __('Tours') }}
                 </x-nav-link>
+                @auth
+                @if(auth()->user()->perfil === 'admin')
                 <x-nav-link :href="route('motoristas.index')" :active="request()->routeIs('motoristas.*')">
                     {{ __('Motoristas') }}
                 </x-nav-link>
+                @endif
+                @endauth
                 <x-nav-link :href="route('pacotes.index')" :active="request()->routeIs('pacotes.*')">
                     {{ __('Pacotes') }}
                 </x-nav-link>

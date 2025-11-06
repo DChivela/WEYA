@@ -30,14 +30,18 @@ class PacoteTuristicoController extends Controller
             'itinerario'    => 'nullable|array',
             'vagas'         => 'required|integer|min:1',
             'ativo'         => 'nullable|boolean',
-            'foto' => 'nullable|image|array',
+            'foto.*' => 'nullable|image|max:2048',
         ]);
 
         // Garantir que "ativo" é boolean
         $validated['ativo'] = $request->has('ativo');
 
         if ($request->hasFile('foto')) {
-            $validated['foto'] = $request->file('fotos')->store('pacotes', 'public');
+            $fotosPaths = [];
+            foreach ($request->file('foto') as $foto) {
+                $fotosPaths[] = $foto->store('pacotes', 'public');
+            }
+            $validated['foto'] = $fotosPaths; // se for um campo JSON na tabela
         }
 
         PacoteTuristico::create($validated);
@@ -66,13 +70,17 @@ class PacoteTuristicoController extends Controller
             'itinerario'    => 'nullable|array',
             'vagas'         => 'required|integer|min:1',
             'ativo'         => 'nullable|boolean',
-            'foto' => 'nullable|image|array',
+            'foto.*' => 'nullable|image|max:2048',
         ]);
 
         $validated['ativo'] = $request->has('ativo');
 
         if ($request->hasFile('foto')) {
-            $validated['foto'] = $request->file('fotos')->store('pacotes', 'public');
+            $fotosPaths = [];
+            foreach ($request->file('foto') as $foto) {
+                $fotosPaths[] = $foto->store('pacotes', 'public');
+            }
+            $validated['foto'] = $fotosPaths; // se for um campo JSON na tabela
         }
 
         $pacote->update($validated);

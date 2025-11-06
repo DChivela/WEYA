@@ -36,8 +36,8 @@ public function store(Request $request): RedirectResponse
         'password' => 'required|string|confirmed|min:8',
         'cell' => 'required|string|max:20',
         'perfil' => 'required|string|max:50',
-        'credito' => 'nullable|numeric',
-        'meta' => 'nullable|string|max:255',
+        // 'credito' => 'nullable|numeric',
+        // 'meta' => 'nullable|string|max:255',
     ]);
 
     $user = User::create([
@@ -46,8 +46,8 @@ public function store(Request $request): RedirectResponse
         'password' => Hash::make($request->password),
         'cell' => $request->cell,
         'perfil' => $request->perfil,
-        'credito' => $request->credito,
-        'meta' => $request->meta,
+        // 'credito' => $request->credito,
+        // 'meta' => $request->meta,
     ]);
 
     event(new Registered($user));

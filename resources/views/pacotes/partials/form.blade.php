@@ -89,11 +89,11 @@
 
 {{-- Fotos do pacote --}}
 <div class="mb-4">
-    <x-input-label for="fotos" value="Fotos do Pacote" />
-    <input type="file" id="fotos" name="fotos[]" multiple accept="image/*"
+    <x-input-label for="foto" value="Fotos do Pacote" />
+    <input type="file" name="foto" multiple accept="image/*"
            class="w-full border rounded p-2">
     <small class="text-gray-500">Podes selecionar várias imagens (JPEG, PNG, até 2MB cada)</small>
-    <x-input-error :messages="$errors->get('fotos')" class="mt-2" />
+    <x-input-error :messages="$errors->get('foto')" class="mt-2" />
 </div>
 
 @push('scripts')

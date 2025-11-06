@@ -25,7 +25,7 @@
         <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full"
-                :value="old('email', $user->email)" required />
+                :value="old('email', $user->email)" disabled title="Deve ter permissão para alterar o seu email" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
         </div>
 
@@ -42,10 +42,9 @@
 
         <!-- Perfil -->
         <div>
-            <x-input-label for="perfil" :value="__('Perfil')" />
+            <x-input-label for="perfil" :value="__('Tipo Conta')" />
             <select id="perfil" name="perfil" class="mt-1 block w-full ...">
                 <option value="turista" {{ old('perfil', $user->perfil ?? '') == 'turista' ? 'selected' : '' }}>Turista</option>
-                <option value="motorista" {{ old('perfil', $user->perfil ?? '') == 'motorista' ? 'selected' : '' }}>Motorista</option>
                 @auth
                 @if(auth()->user()->perfil === 'admin')
                 <option value="admin" {{ old('perfil', $user->perfil ?? '') == 'admin' ? 'selected' : '' }}>Administrador</option>
@@ -57,24 +56,6 @@
             <x-input-error class="mt-2" :messages="$errors->get('perfil')" />
         </div>
 
-
-
-
-        <!-- Crédito -->
-        <div>
-            <x-input-label for="credito" :value="__('Crédito')" />
-            <x-text-input id="credito" name="credito" type="number" step="0.01" class="mt-1 block w-full"
-                :value="old('credito', $user->credito)" />
-            <x-input-error class="mt-2" :messages="$errors->get('credito')" />
-        </div>
-
-        <!-- Meta -->
-        <div>
-            <x-input-label for="meta" :value="__('Meta')" />
-            <x-text-input id="meta" name="meta" type="text" class="mt-1 block w-full"
-                :value="old('meta', $user->meta)" />
-            <x-input-error class="mt-2" :messages="$errors->get('meta')" />
-        </div>
         </div>
 
         <!-- Botão -->
@@ -89,5 +70,6 @@
             </p>
             @endif
         </div>
+        </section>
     </form>
 </section>
