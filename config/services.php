@@ -35,4 +35,16 @@ return [
         ],
     ],
 
+    ////CURL DA OPENAI
+    'openai' => [
+        'key' => env('OPENAI_API_KEY'),
+        'base_uri' => env('OPENAI_BASE_URI', 'https://platform.openai.com/api-keys/'),
+    ],
+
+    //CURL DA GROQ
+    'groq' => [
+        'key' => env('GROQ_API_KEY'),
+        'base_uri' => env('GROQ_API_BASE', 'https://api.groq.com/openai/v1'),
+    ],
+
 ];
