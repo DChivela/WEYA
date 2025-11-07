@@ -69,18 +69,19 @@ Por: Marcos Kafanda, Domingos Chivela...";
         } else {
             $pacotesData = $pacotes->map(function ($p) {
                 return [
-                    'titulo' => $p->nome,
-                    'duracao' => $p->duracao ?? 'não especificado',
-                    'porque' => $p->descricao ?? 'Pacote turístico interessante',
-                    'link' => $p->link ?? '#'
+                    'nome' => $p->nome,
+                    'duracao_dias' => $p->duracao_dias ?? 'não especificado',
+                    'preco' => $p->preco ?? 'Pacote turístico interessante',
+                    'itinerario' => $p->link ?? '#'
                 ];
             });
         }
 
         // Monta o prompt completo para a IA
-        $prompt = $system . "\n\nSugere até 3 pacotes turísticos curtos, cada um com: Título, Duração, Por que é adequado, Link. Use os dados abaixo:\n\n";
+        $prompt = $system . "\n\nSugere até 3 pacotes turísticos curtos, cada um com: Título, Duração, Por que é adequado e com um intervalo de preços.
+        Use os dados abaixo, sem precisar simular uma tabela, formate como uma lista ordenada ou desordenada com paragráfos bem definidos para cada ponto. Não use markdown:\n\n";
         foreach ($pacotesData as $p) {
-            $prompt .= "- Título: {$p['titulo']}, Duração: {$p['duracao']}, Porque: {$p['porque']}, Link: {$p['link']}\n";
+            $prompt .= "- <h3>Descrição:</h3> {$p['nome']}, Duração: {$p['duracao_dias']}, Preco: {$p['preco']}, Itinerário: {$p['itinerario']}\n";
         }
         $prompt .= "\nPergunta do turista: $query";
 

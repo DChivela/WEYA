@@ -19,38 +19,69 @@ class GroqService
     /**
      * Chamada básica à API Groq com string
      */
-    public function generateText(string $prompt, string $model = 'openai/gpt-oss-20b')
-    {
-        $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . $this->apiKey,
-            'Content-Type' => 'application/json',
-        ])->post($this->baseUri . '/responses', [
-            'model' => $model,
-            'input' => $prompt,
-        ]);
+   public function generateText(string $prompt, string $model = 'openai/gpt-oss-20b'): string
+{
+    $url = rtrim($this->baseUri, '/') . '/responses';
 
-        if (!$response->ok()) {
-            // Retorna erro detalhado
-            return 'Erro ao contactar a API Groq: HTTP ' . $response->status();
-        }
+    $response = Http::withHeaders([
+        'Authorization' => 'Bearer ' . $this->apiKey,
+        'Content-Type'  => 'application/json',
+    ])->post($url, [
+        'model' => $model,
+        'input' => $prompt,
+    ]);
 
-        $respJson = $response->json();
+    if (!$response->ok()) {
+        return 'Erro ao contactar a API Groq: HTTP ' . $response->status();
+    }
 
-        // Tenta extrair texto de várias formas possíveis
-        if (isset($respJson['output'])) {
-            foreach ($respJson['output'] as $out) {
-                if (isset($out['content']) && is_array($out['content'])) {
+    $respJson = $response->json();
+
+    // 1) Procura por outputs do tipo "message" (normalmente o texto final do assistant)
+    if (!empty($respJson['output']) && is_array($respJson['output'])) {
+        foreach ($respJson['output'] as $out) {
+            if (isset($out['type']) && $out['type'] === 'message') {
+                if (!empty($out['content']) && is_array($out['content'])) {
                     foreach ($out['content'] as $c) {
-                        if (isset($c['text'])) {
-                            return $c['text'];
+                        if (isset($c['text']) && is_string($c['text'])) {
+                            return trim($c['text']);
                         }
                     }
                 }
             }
         }
 
-        return 'Não foi possível gerar resposta.';
+        // 2) Se não encontrou "message", tenta o último output e extrai primeiro 'text' útil
+        $last = end($respJson['output']);
+        if (!empty($last['content']) && is_array($last['content'])) {
+            foreach ($last['content'] as $c) {
+                if (isset($c['text']) && is_string($c['text'])) {
+                    return trim($c['text']);
+                }
+            }
+        }
     }
+
+    // 3) Fallback: tenta extrair de choices -> message -> content
+    if (!empty($respJson['choices']) && is_array($respJson['choices'])) {
+        foreach ($respJson['choices'] as $choice) {
+            if (isset($choice['message']['content'])) {
+                if (is_string($choice['message']['content'])) {
+                    return trim($choice['message']['content']);
+                }
+                if (is_array($choice['message']['content'])) {
+                    foreach ($choice['message']['content'] as $c) {
+                        if (isset($c['text']) && is_string($c['text'])) {
+                            return trim($c['text']);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return 'Não foi possível gerar resposta.';
+}
 
 
     /**

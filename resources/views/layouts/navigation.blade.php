@@ -131,69 +131,70 @@
         </div>
     </div>
 </nav>
-            <!-- Caixa de interação do Assistente Turístico -->
-            <div id="ai-widget" style="position:fixed;right:20px;bottom:20px;width:320px;background:#fff;padding:12px;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.12);z-index:9999;font-family:sans-serif;">
-                <div style="font-weight:bold;margin-bottom:8px;">Assistente Turístico</div>
+<!-- Caixa de interação do Assistente Turístico -->
+<div id="ai-widget" style="position:fixed;right:20px;bottom:20px;width:320px;background:#fff;padding:12px;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.12);z-index:9999;font-family:sans-serif;">
+    <div style="font-weight:bold;margin-bottom:8px;">Assistente Turístico</div>
 
-                <div id="ai-history" style="height:200px;overflow-y:auto;border:1px solid #ddd;padding:8px;border-radius:4px;background:#f9f9f9;"></div>
+    <div id="ai-history" style="height:200px;overflow-y:auto;border:1px solid #ddd;padding:8px;border-radius:4px;background:#f9f9f9;"></div>
 
-                <textarea id="ai-q" rows="3" style="width:100%;margin-top:8px;padding:6px;" placeholder="Escreve a tua pergunta aqui..."></textarea>
-                <button id="ai-send" style="width:100%;margin-top:8px;">Perguntar</button>
-            </div>
+    <textarea id="ai-q" rows="3" style="width:100%;margin-top:8px;padding:6px;" placeholder="Escreve a tua pergunta aqui..."></textarea>
+    <button id="ai-send" style="width:100%;margin-top:8px;">Perguntar</button>
+</div>
 
-            <script>
-                const historyDiv = document.getElementById('ai-history');
-                const inputEl = document.getElementById('ai-q');
-                const resDiv = historyDiv;
+<script>
+    const historyDiv = document.getElementById('ai-history');
+    const inputEl = document.getElementById('ai-q');
+    const resDiv = historyDiv;
 
 
-                document.getElementById('ai-send').addEventListener('click', async () => {
-                    const q = inputEl.value.trim();
-                    if (!q) return alert('Escreve a pergunta');
+    document.getElementById('ai-send').addEventListener('click', async () => {
+        const q = inputEl.value.trim();
+        if (!q) return alert('Escreve a pergunta');
 
-                    // Adiciona pergunta ao histórico
-                    const userMsg = document.createElement('div');
-                    userMsg.style.fontWeight = 'bold';
-                    userMsg.style.marginBottom = '4px';
-                    userMsg.textContent = "Tu: " + q;
-                    historyDiv.appendChild(userMsg);
+        // Adiciona pergunta ao histórico
+        const userMsg = document.createElement('div');
+        userMsg.style.fontWeight = 'bold';
+        userMsg.style.color = '#094687';
+        userMsg.style.marginBottom = '4px';
+        userMsg.textContent = "Tu: " + q;
+        historyDiv.appendChild(userMsg);
 
-                    // Mostra "A processar..." para a resposta
-                    const loadingMsg = document.createElement('div');
-                    loadingMsg.style.color = '#888';
-                    loadingMsg.style.marginBottom = '8px';
-                    loadingMsg.textContent = "Assistente: A processar...";
-                    historyDiv.appendChild(loadingMsg);
-                    historyDiv.scrollTop = historyDiv.scrollHeight;
+        // Mostra "A processar..." para a resposta
+        const loadingMsg = document.createElement('div');
+        loadingMsg.style.color = '#121f00';
+        loadingMsg.style.marginBottom = '8px';
+        loadingMsg.textContent = "Assistente: A processar...";
+        historyDiv.appendChild(loadingMsg);
+        historyDiv.scrollTop = historyDiv.scrollHeight;
 
-                    inputEl.value = '';
+        inputEl.value = '';
 
-                    try {
-                        const resp = await fetch('/ai/query', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                            },
-                            body: JSON.stringify({
-                                q
-                            })
-                        });
+        try {
+            const resp = await fetch('/ai/query', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({
+                    q
+                })
+            });
 
-                        const data = await resp.json();
+            const data = await resp.json();
 
-                        loadingMsg.textContent = data && typeof data.answer === 'string' ?
-                            "Assistente: " + data.answer :
-                            "Erro: resposta inválida";
+            loadingMsg.textContent = data && typeof data.answer === 'string' ?
+                "Assistente: " + data.answer :
+                "Erro: resposta inválida";
 
-                        historyDiv.scrollTop = historyDiv.scrollHeight;
+            historyDiv.scrollTop = historyDiv.scrollHeight;
 
-                    } catch (err) {
-                        loadingMsg.textContent = 'Erro ao contactar o servidor: ' + err.message;
-                        historyDiv.scrollTop = historyDiv.scrollHeight;
-                    }
-                });
-            </script>
+        } catch (err) {
+            loadingMsg.textContent = 'Erro ao contactar o servidor: ' + err.message;
+            historyDiv.scrollTop = historyDiv.scrollHeight;
+        }
+    });
+</script>
 
 <script>
     const html = document.documentElement;
