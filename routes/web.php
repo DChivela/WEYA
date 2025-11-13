@@ -7,6 +7,8 @@ use App\Http\Controllers\MotoristaController;
 use App\Http\Controllers\PacoteTuristicoController;
 use App\Http\Controllers\PromocaoController;
 use App\Http\Controllers\AiController;
+use App\Http\Controllers\HotelController;
+use App\Http\Controllers\RestauranteController;
 use App\Services\GroqService;
 
 Route::get('/', function () {
@@ -25,6 +27,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('/motoristas', MotoristaController::class);
     Route::resource('/pacotes', PacoteTuristicoController::class);
     Route::resource('/promocoes', PromocaoController::class);
+    Route::resource('/hoteis', HotelController::class);
+    Route::resource('/restaurantes', RestauranteController::class);
 });
 
 Route::post('/ai/query', [AiController::class, 'query']);

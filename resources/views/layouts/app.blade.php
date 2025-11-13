@@ -33,7 +33,7 @@
 </head>
 
 <body class="font-sans antialiased bg-cover bg-center bg-fixed"
-    style="background-image: url('{{ asset('assets/img/tundavala.jpg') }}');">
+    style="background-image: url('{{ asset('image/img/tundavala.jpg') }}');">
     <div class="min-h-screen bg-black bg-opacity-60">
         @include('layouts.navigation')
 

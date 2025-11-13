@@ -25,7 +25,7 @@
                     {{ __('Tours') }}
                 </x-nav-link>
                 @auth
-                @if(auth()->user()->perfil === 'admin')
+                @if(auth()->user()->perfil === 'admin' || auth()->user()->perfil === 'motorista')
                 <x-nav-link :href="route('motoristas.index')" :active="request()->routeIs('motoristas.*')">
                     {{ __('Motoristas') }}
                 </x-nav-link>
@@ -36,6 +36,12 @@
                 </x-nav-link>
                 <x-nav-link :href="route('promocoes.index')" :active="request()->routeIs('promocoes.*')">
                     {{ __('Promoções') }}
+                </x-nav-link>
+                <x-nav-link :href="route('hoteis.index')" :active="request()->routeIs('hoteis.*')">
+                    {{ __('Hóteis') }}
+                </x-nav-link>
+                <x-nav-link :href="route('restaurantes.index')" :active="request()->routeIs('restaurantes.*')">
+                    {{ __('Restaurantes') }}
                 </x-nav-link>
                 <!-- Dentro de resources/views/layouts/navigation.blade.php -->
                 <div class="hidden sm:flex sm:items-center sm:ms-6">

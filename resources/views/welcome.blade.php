@@ -1549,7 +1549,7 @@
             <a href="{{ route('register') }}"
                 class="inline-block px-6 py-2.5 text-base font-medium dark:text-[#EDEDEC] text-[#1b1b18] border border-transparent rounded-md leading-normal flex items-center gap-2 transition-colors duration-300
           hover:bg-yellow-400 hover:text-black hover:border-yellow-500 dark:hover:bg-gray-200 dark:hover:text-black">
-                <i class="bi bi-person-plus animate-slowPulse"></i> Register
+                <i class="bi bi-person-plus animate-slowPulse"></i> Registar
             </a>
             @endif
             @endauth
@@ -1581,7 +1581,7 @@
                         <span class="inline-block w-6 animate-carDrive">
                             <i class="bi bi-chevron-double-right text-xl"></i>
                         </span>
-                        Agende sua Corrida
+                        Agende sua Tour
                     </a>
 
 
