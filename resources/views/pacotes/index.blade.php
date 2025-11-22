@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="relative min-h-screen flex flex-col bg-cover bg-center"
-        style="background-image: url('/assets/img/promotion_05.jpg');">
+        style="background-image: url('/assets/img/Beach.jpg');">
 
         <!-- Camada de desfoque e escurecimento -->
         <div class="absolute inset-0 bg-black bg-opacity-60 backdrop-blur-sm"></div>
@@ -72,17 +72,17 @@
                                         </span>
 
                                         <div class="flex flex-col text-sm text-right mt-6 space-y-1">
-                                            <a href="{{ route('pacotes.show', $pacote) }}" class="text-blue-600">Ver</a>
+                                            <a href="{{ route('pacotes.show', $pacote) }}" class="text-blue-600"><i class="bi bi-eye text-xl"></i></a>
 
                                             @auth
                                             @if (auth()->user()->perfil === 'admin')
-                                            <a href="{{ route('pacotes.edit', $pacote) }}" class="text-yellow-500">Editar</a>
+                                            <a href="{{ route('pacotes.edit', $pacote) }}" class="text-yellow-500"><i class="bi bi-pencil-square text-xl"></i></a>
 
                                             <form action="{{ route('pacotes.destroy', $pacote) }}" method="POST">
                                                 @csrf @method('DELETE')
                                                 <button onclick="return confirm('Tem certeza?')"
                                                     class="text-red-600">
-                                                    Apagar
+                                                    <i class="bi bi-trash text-xl"></i>
                                                 </button>
                                             </form>
                                             @endif
