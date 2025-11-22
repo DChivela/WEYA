@@ -1,11 +1,18 @@
 <x-app-layout>
+
+    <div class="relative min-h-screen flex flex-col bg-cover bg-center"
+        style="background-image: url('/assets/img/driver_01.jpg');">
+
+        <!-- Camada de desfoque e escurecimento -->
+        <div class="absolute inset-0 bg-black bg-opacity-60 backdrop-blur-sm"></div>
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Nova Corrida') }}
         </h2>
     </x-slot>
 
-    <div class="py-6">
+    <div class="py-6 relative z-10 fade-in">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg p-6">
                 <form method="POST" action="{{ route('corridas.store') }}">
@@ -16,7 +23,7 @@
                         <x-input-label for="tipo" :value="'Tipo da Corrida'" />
                         <select id="tipo" name="tipo" class="mt-1 block w-full border-gray-300 rounded-md">
                             <option value="regular">Regular</option>
-                            <option value="pacote">Pacote</option>
+                            <option value="pacote" hidden>Pacote</option>
                             <option value="compartilhada">Compartilhada</option>
                         </select>
                         <x-input-error :messages="$errors->get('tipo')" class="mt-2" />
@@ -85,6 +92,7 @@
                 </form>
             </div>
         </div>
+    </div>
     </div>
 
     @push('scripts')

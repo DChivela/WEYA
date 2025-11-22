@@ -27,10 +27,11 @@ class PacoteTuristicoController extends Controller
             'preco'         => 'required|numeric|min:0',
             'duracao_dias'  => 'required|integer|min:1',
             'local_partida' => 'required|string|max:255',
+            'destino' => 'required|string|max:255',
             'itinerario'    => 'nullable|array',
             'vagas'         => 'required|integer|min:1',
             'ativo'         => 'nullable|boolean',
-            'foto.*' => 'nullable|image|max:2048',
+            'foto' => 'nullable|image|max:4048',
         ]);
 
         // Garantir que "ativo" é boolean
@@ -67,20 +68,18 @@ class PacoteTuristicoController extends Controller
             'preco'         => 'required|numeric|min:0',
             'duracao_dias'  => 'required|integer|min:1',
             'local_partida' => 'required|string|max:255',
+            'destino' => 'required|string|max:255',
             'itinerario'    => 'nullable|array',
             'vagas'         => 'required|integer|min:1',
             'ativo'         => 'nullable|boolean',
-            'foto.*' => 'nullable|image|max:2048',
+            'foto' => 'nullable|image|max:5048',
         ]);
-
-        $validated['ativo'] = $request->has('ativo');
-
         if ($request->hasFile('foto')) {
-            $fotosPaths = [];
-            foreach ($request->file('foto') as $foto) {
-                $fotosPaths[] = $foto->store('pacotes', 'public');
+            if ($pacote->foto) {
+                Storage::delete('public/' . $pacote->foto);
             }
-            $validated['foto'] = $fotosPaths; // se for um campo JSON na tabela
+
+            $validated['foto'] = $request->file('foto')->store('pacotes', 'public');
         }
 
         $pacote->update($validated);

@@ -1,63 +1,58 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Lista de Corridas') }}
-        </h2>
-    </x-slot>
+    <div class="relative min-h-screen flex items-center justify-center bg-cover bg-center"
+        style="background-image: url('/assets/img/promotion_03.jpg');">
+        <!-- camada de escurecimento suave -->
+        <div class="absolute inset-0 bg-black bg-opacity-70"></div>
 
-    <div class="py-6">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
-                <div class="flex justify-end mb-4">
-                    <a href="{{ route('corridas.create') }}"
-                       class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">
-                        Nova Corrida
-                    </a>
-                </div>
-
-                <table class="w-full text-left border-collapse">
-                    <thead>
-                        <tr class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
-                            <th class="px-4 py-2">ID</th>
-                            <th class="px-4 py-2">Origem</th>
-                            <th class="px-4 py-2">Destino</th>
-                            <th class="px-4 py-2">Data</th>
-                            <th class="px-4 py-2">Preço</th>
-                            <th class="px-4 py-2">Motorista</th>
-                            <th class="px-4 py-2">Autor</th>
-                            <th class="px-4 py-2">Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($corridas as $corrida)
-                            <tr class="border-b dark:border-gray-700">
-                                <td class="px-4 py-2">{{ $corrida->id }}</td>
-                                <td class="px-4 py-2">{{ $corrida->origem_endereco ?? '--' }}</td>
-                                <td class="px-4 py-2">{{ $corrida->destino_endereco ?? '--' }}</td>
-                                <td class="px-4 py-2">{{ $corrida->agendado_para ?? '--' }}</td>
-                                <td class="px-4 py-2">{{ $corrida->preco ?? '--' }}</td>
-                                {{-- @foreach ($motoristas as $motorista ) --}}
-                                <td class="px-4 py-2">{{ $corrida->motorista->nome ?? 'Sem motorista' }}</td>
-                                {{-- @endforeach --}}
-
-                                <td>{{ $corrida->usuario->name }}</td>
-                                <td class="px-4 py-2">
-                                    <a href="{{ route('corridas.edit', $corrida) }}"
-                                       class="text-blue-600 hover:underline"><i class="bi bi-pencil"></i></a>
-                                    <form action="{{ route('corridas.destroy', $corrida) }}"
-                                          method="POST" class="inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="text-red-600 hover:underline ml-2">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+        <x-slot name="header">
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                {{ __('Promoções') }}
+            </h2>
+        </x-slot>
+        <!-- conteúdo -->
+        <div class="relative z-10 text-center fade-in">
+            <h1 class="text-5xl md:text-6xl font-extrabold text-white tracking-wide mb-4 animate-pulse">
+                Sem Promoções!
+            </h1>
+            <p class="text-lg md:text-xl text-gray-200 opacity-90 font-light italic">
+                Sem promoções no momento.
+            </p>
         </div>
+
+        <style>
+            @keyframes pulse {
+
+                0%,
+                100% {
+                    opacity: 0.7;
+                    text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+                }
+
+                50% {
+                    opacity: 1;
+                    text-shadow: 0 0 25px rgba(255, 255, 255, 0.9);
+                }
+            }
+
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .animate-pulse {
+                animation: pulse 3s ease-in-out infinite;
+            }
+
+            .fade-in {
+                animation: fadeIn 1.5s ease-out both;
+            }
+        </style>
     </div>
 </x-app-layout>

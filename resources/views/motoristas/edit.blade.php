@@ -77,7 +77,7 @@
                         </div>
 
                         {{-- Avaliação média --}}
-                        <div class="mb-4">
+                        <div class="mb-4" hidden>
                             <label class="block text-sm font-medium">Classificação</label>
                             <select name="avaliacao_media" class="w-full border rounded p-2">
                                 @for ($i = 1; $i <= 5; $i++)

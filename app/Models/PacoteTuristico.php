@@ -9,10 +9,10 @@ class PacoteTuristico extends Model
     use SoftDeletes;
 
     protected $table = 'pacotes_turisticos';
-    protected $fillable = ['nome','descricao','preco','duracao_dias','local_partida','itinerario','vagas','ativo',];
+    protected $fillable = ['nome','descricao','preco','duracao_dias','local_partida','destino','itinerario','vagas','ativo','foto',];
     protected $casts = [
         'itinerario' => 'array',
         'ativo' => 'boolean',
-        'foto' => 'array', // para gravar várias fotos como um array JSON
+         // para gravar várias fotos como um array JSON
     ];
 }

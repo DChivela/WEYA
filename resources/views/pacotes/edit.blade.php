@@ -14,6 +14,7 @@
                     @include('pacotes.partials.form', ['pacote' => $pacote])
 
                     <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Atualizar</button>
+                    <a href="{{ route('pacotes.index') }}" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Voltar</a>
                 </form>
             </div>
         </div>

@@ -1,0 +1,201 @@
+:root {
+    --clr-accent: #1c7ceb;
+    --gap-fluid: 1.5rem;
+}
+
+/* ===== NAVBAR ===== */
+.main-nav {
+    background: rgba(28, 124, 235, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--gap-fluid) 0;
+    position: relative;
+}
+
+/* esconder checkbox */
+.nav-toggle {
+    display: none;
+}
+
+/* hamburger */
+.nav-toggle-label {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+}
+
+.nav-toggle-label span {
+    position: relative;
+    background: var(--clr-accent);
+    height: 3px;
+    border-radius: 2px;
+    display: block;
+    transition: all 0.3s ease-in-out;
+}
+
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background: var(--clr-accent);
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
+}
+
+.nav-toggle-label span::before {
+    top: -7px;
+}
+
+.nav-toggle-label span::after {
+    top: 7px;
+}
+
+/* animação do X */
+.nav-toggle:checked+.nav-toggle-label span {
+    background: transparent;
+}
+
+.nav-toggle:checked+.nav-toggle-label span::before {
+    transform: rotate(45deg);
+    top: 0;
+}
+
+.nav-toggle:checked+.nav-toggle-label span::after {
+    transform: rotate(-45deg);
+    top: 0;
+}
+
+/* menu desktop */
+.nav-menu {
+    display: flex;
+    gap: var(--gap-fluid);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-logo img {
+    height: 40px;
+    margin-right: 1.5rem;
+}
+
+.nav-menu a {
+    font-weight: 700;
+    color: #1c7ceb;
+    text-decoration: none;
+    padding: 0.5em;
+    transition: background 0.2s;
+}
+
+.nav-menu a:hover {
+    background: coral;
+    border-radius: 0.25em;
+}
+
+/* === RESPONSIVO === */
+@media (max-width: 768px) {
+    .nav-toggle-label {
+        display: flex;
+    }
+
+    .nav-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(28, 124, 235, 0.1);
+        flex-direction: column;
+        align-items: center;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-in-out;
+        z-index: 999;
+    }
+
+    .nav-toggle:checked~.nav-menu {
+        max-height: 300px;
+    }
+}
+
+/* === BOTÃO "Ver mais" === */
+.service-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    background: #1c7ceb;
+    color: white;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 0.5em;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.service-btn small i {
+    font-size: 0.8em;
+    /* Reduz tamanho do ícone */
+}
+
+.service-btn:hover {
+    background: coral;
+    color: white;
+}
+
+.service-btn:hover small i {
+    transform: rotate(90deg);
+}
+
+.service-btn:hover small {
+    transform: translateX(0.2em);
+}
+
+.service-btn:hover {
+    transform: translateY(-0.1em);
+}
+
+.service-btn:active {
+    transform: translateY(0);
+}
+
+.service-btn:active small {
+    transform: translateX(0);
+}
+
+.service-btn:active small i {
+    transform: rotate(0deg);
+}
+
+/* ===== RESPONSIVIDADE DO HEADER ===== */
+@media (max-width: 768px) {
+    .nav-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(28, 124, 235, 0.1);
+        flex-direction: column;
+        align-items: center;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-in-out;
+        z-index: 999;
+    }
+
+    .nav-toggle:checked~.nav-menu {
+        max-height: 300px;
+    }
+}
