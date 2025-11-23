@@ -36,6 +36,52 @@ Para isto usou-se o `embedding` (algorítimos de modelos de aprendizado de máqu
 
 # Considerações CSS
 
+## Navigation - Visão Geral
+O sistema de navegação utiliza **TailwindCSS**, **Blade Components** e **Alpine.js** para fornecer um menu responsivo com duas versões:
+**Menu Desktop** – exibido a partir de **sm**: ``(≥ 640px)``
+
+**Menu Mobile (Hamburger)** – exibido abaixo de **sm**: ``(< 640px)``
+
+Ambos utilizam os componentes do Breeze:
+* <x-nav-link> (versão desktop)
+* <x-responsive-nav-link> (versão mobile)
+
+O estado de abertura do menu mobile é controlado pelo Alpine.js usando a variável open.
+A navegação está envolvida por um container Alpine:
+<nav x-data="{ open: false }">
+
+- A variável open controla:
+- Visibilidade do menu mobile
+- Alternância dos ícones do botão hamburger
+
+### Códigos da versão desktop
+Código do menu normal
+``
+                ``<div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">``
+                    ``<x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">``
+                       `` {{ __('Dashboard') }}``
+                    ``</x-nav-link>``
+                ``</div>``
+
+#### Características:
+- Utiliza o espaço horizontal **(space-x-4)**;
+- Componente padrão <x-nav-link>;
+- Não aparece em telas pequenas **(hidden sm:flex)**.
+
+### Cdigo da versão mobile
+O botão do menu aparece apenas em telas pequenas (sm:hidden):
+``<button @click="open = !open" class="sm:hidden">``
+
+Código do menu-mobile - para usar dentro da classe do Hamburguer (menu colapsável:):
+``    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden"> ``
+       `` <div class="pt-2 pb-3 space-y-1">``
+            ``<x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">``
+                ``{{ __('Dashboard') }}``
+            ``</x-responsive-nav-link>``
+        ``</div>``
+``</div>``
+        
+
 ## Páginas do Brevemente
 A ideia foi aplicar um fundo com imagem suave, um leve gradiente escuro transparente e um texto central com um efeito ``“coming soon”`` animado (brilho, fade, e escrita suave).
 Toques técnicos para as páginas de **Brevemente**:
