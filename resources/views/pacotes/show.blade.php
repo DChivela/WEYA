@@ -31,6 +31,7 @@
                     <p class="mt-2">{{ $pacote->descricao }}</p>
                     <p><strong>Duração:</strong> {{ $pacote->duracao_dias }} dias</p>
                     <p><strong>Local de Partida:</strong> {{ $pacote->local_partida }}</p>
+                    <p><strong>Destino:</strong> {{ $pacote->destino }}</p>
                     <p><strong>Vagas:</strong> {{ $pacote->vagas }}</p>
                     <p><strong>Ativo:</strong> {{ $pacote->ativo ? 'Sim' : 'Não' }}</p>
 
