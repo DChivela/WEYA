@@ -7,17 +7,28 @@ use App\Http\Controllers\MotoristaController;
 use App\Http\Controllers\PacoteTuristicoController;
 use App\Http\Controllers\PromocaoController;
 use App\Http\Controllers\AiController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HotelController;
+use App\Http\Controllers\PacotesDestaque;
 use App\Http\Controllers\RestauranteController;
 use App\Services\GroqService;
 
 Route::get('/', function () {
     return view('welcome');
 });
+ //Rota antiga do dashboard
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
+
+
+// Route::get('/destaques', [PacotesDestaque::class, 'index'])->name('destaques.index');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

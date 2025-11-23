@@ -14,7 +14,7 @@
         <div class="relative z-10 py-10 fade-in">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <a href="{{ route('pacotes.create') }}"
-                    class="mb-6 inline-block bg-gradient-to-r bg-blue-600 from-blue-600 to-blue-500 text-white font-semibold px-5 py-2 rounded-lg shadow-md hover:scale-105 transform transition duration-300">Novo Pacote</a>
+                    class="mb-6 inline-block bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-500 hover:to-red-600 font-semibold px-5 py-2 rounded-lg shadow-md hover:scale-105 transform transition duration-300"><i class="bi bi-plus-square-dotted"></i> Novo Pacote</a>
 
                 @if(session('success'))
                 <div class="mb-4 p-3 bg-green-100 text-green-800 rounded">
@@ -50,7 +50,7 @@
                                                 <div class="mt-1 space-y-4 text-sm text-gray-600 dark:text-gray-300">
                                                     <div><i class="bi bi-geo-alt"></i> {{ $pacote->destino ?? '—' }}</div>
                                                     <div><i class="bi bi-clock"></i> {{ $pacote->duracao_dias }} dias</div>
-                                                    <div class="text-green-600 font-semibold">{{ number_format($pacote->preco, 2, ',', '.') }} Kz</div>
+                                                    <div class="text-green-600 font-semibold"><i class="bi bi-cash"></i> {{ number_format($pacote->preco, 2, ',', '.') }} Kz</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -100,7 +100,7 @@
                                             <div class="mt-2 text-sm text-gray-600 dark:text-gray-300 space-y-2">
                                                 <div><i class="bi bi-geo-alt"></i> {{ $pacote->destino ?? '—' }}</div>
                                                 <div><i class="bi bi-clock"></i> {{ $pacote->duracao_dias }} dias</div>
-                                                <div class="text-green-600 font-semibold">{{ number_format($pacote->preco, 2, ',', '.') }} Kz</div>
+                                                <div class="text-green-600 font-semibold"><i class="bi bi-cash"></i>{{ number_format($pacote->preco, 2, ',', '.') }} Kz</div>
                                             </div>
                                         </div>
 

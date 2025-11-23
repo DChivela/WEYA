@@ -14,6 +14,7 @@ class PacoteTuristicoController extends Controller
         return view('pacotes.index', compact('pacotes'));
     }
 
+
     public function create()
     {
         return view('pacotes.create');
@@ -25,6 +26,7 @@ class PacoteTuristicoController extends Controller
             'nome'          => 'required|string|max:255',
             'descricao'     => 'nullable|string',
             'preco'         => 'required|numeric|min:0',
+            'destaque'         => 'nullable|boolean',
             'duracao_dias'  => 'required|integer|min:1',
             'local_partida' => 'required|string|max:255',
             'destino' => 'required|string|max:255',
@@ -67,6 +69,7 @@ class PacoteTuristicoController extends Controller
             'nome'          => 'required|string|max:255',
             'descricao'     => 'nullable|string',
             'preco'         => 'required|numeric|min:0',
+            'destaque'         => 'nullable|boolean',
             'duracao_dias'  => 'required|integer|min:1',
             'local_partida' => 'required|string|max:255',
             'destino' => 'required|string|max:255',

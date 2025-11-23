@@ -75,9 +75,9 @@
                         {{--<a href="{{ route('comprar.pacote', $pacote->id) }}"--}}
                         <a href="{{ route('pacotes.index', $pacote->id) }}"
                             class="inline-block px-6 py-3 bg-gradient-to-r from-green-500 to-blue-500
-              text-white font-semibold rounded-full shadow-lg transform
-              transition duration-300 hover:scale-105 hover:from-orange-500 hover:to-yellow-500">
-                            🛒 Comprar Pacote
+              text-gray-950 dark:text-gray-800 font-semibold rounded-full shadow-lg transform
+              transition duration-300 hover:scale-105 hover:from-orange-500 hover:to-yellow-500 hover:dark:text-gray-900">
+                            <i class="bi bi-cart4"></i> Comprar Pacote
                         </a>
                     </div>
 

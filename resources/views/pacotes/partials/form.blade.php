@@ -50,7 +50,7 @@
 <div class="mb-4">
     <x-input-label for="destino" value="Local de destino" />
     <x-text-input id="destino" name="destino" type="text" class="w-full"
-        value="{{ old('destino', $pacote->local_partida ?? '') }}" required />
+        value="{{ old('destino', $pacote->destino ?? '') }}" required />
     <x-input-error :messages="$errors->get('destino')" class="mt-2" />
 </div>
 
@@ -83,15 +83,28 @@ if (!is_array($itensItinerario)) { $itensItinerario = []; }
     <x-input-error :messages="$errors->get('itinerario')" class="mt-2" />
 </div>
 
-{{-- Ativo (checkbox) --}}
+{{-- Ativo (checkbox). Precisamos do campo hidden com o valor 0 (zero) para enviar o valor quando for retirado de ativo--}}
 <div class="mb-4">
     <label class="inline-flex items-center gap-2">
+        <input type="hidden" name="ativo" value="0">
         <input type="checkbox" name="ativo" value="1"
             {{ old('ativo', $pacote->ativo ?? false) ? 'checked' : '' }}
             class="rounded border-gray-300">
         <span>Ativo</span>
     </label>
     <x-input-error :messages="$errors->get('ativo')" class="mt-2" />
+</div>
+
+{{-- Destacar (checkbox). Precisamos do campo hidden com o valor 0 (zero) para enviar o valor quando for retirado do destaque --}}
+<div class="mb-4">
+    <label class="inline-flex items-center gap-2">
+        <input type="hidden" name="destaque" value="0">
+        <input type="checkbox" name="destaque" value="1"
+            {{ old('destaque', $pacote->destaque ?? false) ? 'checked' : '' }}
+            class="rounded border-gray-300">
+        <span>Destacar</span>
+    </label>
+    <x-input-error :messages="$errors->get('destaque')" class="mt-2" />
 </div>
 
 {{-- Itens Incuídos (array dinâmico) --}}

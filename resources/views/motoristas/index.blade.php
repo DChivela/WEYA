@@ -28,7 +28,7 @@
 
                         <table class="min-w-full border-collapse text-sm md:text-base">
                             <thead class="bg-gray-100 dark:bg-gray-700/70">
-                                <tr class="border-b border-gray-300 dark:border-gray-600 text-gray-100 dark:text-gray-100">
+                                <tr class="border-b border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100">
                                     <th class="px-4 py-2 text-left">Foto</th>
                                     <th class="px-4 py-2 text-left">Nome</th>
                                     <th class="px-4 py-2 text-left">Telefone</th>
@@ -42,7 +42,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($motoristas as $motorista)
-                                <tr class="border-b hover:bg-gray-50 hover:text-gray-800 dark:hover:bg-gray-800/50 transition text-white">
+                                <tr class="border-b hover:bg-gray-50 hover:text-gray-800 dark:hover:bg-gray-800/50 transition">
                                     <td class="px-4 py-2">
                                         @if($motorista->foto)
                                         <img src="{{ asset('storage/' . $motorista->foto) }}"
