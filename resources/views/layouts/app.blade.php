@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
     <link rel="stylesheet" href="{{ asset('css/header.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/navigation.css') }}">
 
 
     <!-- Para os recursos dos mapas -->
@@ -57,10 +58,18 @@
     @push('scripts')
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
     @endpush
 
 
 
+                <!--
+██████╗  ██████╗██╗  ██╗██╗██╗   ██╗███████╗██╗      █████╗
+██╔══██╗██╔════╝██║  ██║██║██║   ██║██╔════╝██║     ██╔══██╗
+██║  ██║██║     ███████║██║██║   ██║█████╗  ██║     ███████║
+██║  ██║██║     ██╔══██║██║╚██╗ ██╔╝██╔══╝  ██║     ██╔══██║
+██████╔╝╚██████╗██║  ██║██║ ╚████╔╝ ███████╗███████╗██║  ██║
+╚═════╝  ╚═════╝╚═╝  ╚═╝╚═╝  ╚═══╝  ╚══════╝╚══════╝╚═╝  ╚═╝ -->>
 </body>
 
 
