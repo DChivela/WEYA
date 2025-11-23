@@ -35,7 +35,7 @@ Para isto usou-se o `embedding` (algorítimos de modelos de aprendizado de máqu
 - PacoteTuristicos: id, nome, descrição longa, inclusões, duracao, preco, itinerário, pontos de interesse.
 
 # Considerações CSS
-
+**_Importante:_** Para rodar o projecto devemos usar sempre o ``composer run dev`` ou o ``npm run dev`` para que todas as dependências sejam usadas, pois o ``php artisan serve`` levanta apenas o servidor do **Laravel** e não as demais como o **Tailwind CSS** ou o **Vite** que são os responsáveis por outras funcionalidades da beleza ou execução de algum recurso.
 ## Navigation - Visão Geral
 O sistema de navegação utiliza **TailwindCSS**, **Blade Components** e **Alpine.js** para fornecer um menu responsivo com duas versões:
 **Menu Desktop** – exibido a partir de **sm**: ``(≥ 640px)``

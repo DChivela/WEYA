@@ -94,8 +94,36 @@ if (!is_array($itensItinerario)) { $itensItinerario = []; }
     <x-input-error :messages="$errors->get('ativo')" class="mt-2" />
 </div>
 
-{{-- Fotos do pacote --}}
+{{-- Itens Incuídos (array dinâmico) --}}
+@php
+$itensIncluidos = old('incluido', $pacote->incluido ?? []);
+if (!is_array($itensIncluidos)) { $itensIncluidos = []; }
+@endphp
 
+<div class="mb-4">
+    <x-input-label value="Incluido (etapas)" />
+    <div id="incluido-wrapper" class="space-y-2">
+        @forelse($itensIncluidos as $i => $etapas)
+        <div class="flex items-center gap-2">
+            <input type="text" name="incluido[]" class="flex-1 border rounded p-2"
+                value="{{ $etapas }}" placeholder="Ex.: Refeições incluídas" />
+            <button type="button" class="remove-etapa-incluida px-3 py-2 bg-red-100 text-red-700 rounded">Remover</button>
+        </div>
+        @empty
+        <div class="flex items-center gap-2">
+            <input type="text" name="incluido[]" class="flex-1 border rounded p-2"
+                placeholder="Ex.: Transporte ida e volta" />
+            <button type="button" class="remove-etapa-incluida px-3 py-2 bg-red-100 text-red-700 rounded">Remover</button>
+        </div>
+        @endforelse
+    </div>
+    <div class="mt-2">
+        <button type="button" id="add-etapa-incluida" class="px-4 py-2 bg-gray-200 rounded">Adicionar etapa</button>
+    </div>
+    <x-input-error :messages="$errors->get('incluido')" class="mt-2" />
+</div>
+
+{{-- Fotos do pacote --}}
 <div class="mb-4">
     <label class="block text-sm font-medium">Foto</label>
     <input type="file" name="foto" class="w-full border rounded p-2" accept="image/*">
@@ -108,20 +136,38 @@ if (!is_array($itensItinerario)) { $itensItinerario = []; }
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const wrapper = document.getElementById('itinerario-wrapper');
+        const Incluido_wrapper = document.getElementById('incluido-wrapper');
         const addBtn = document.getElementById('add-etapa');
+        const addBtnIncluida = document.getElementById('add-etapa-incluida');
 
         function createRow(value = '') {
             const row = document.createElement('div');
             row.className = 'flex items-center gap-2';
             row.innerHTML = `
-            <input type="text" name="itinerario[]" class="flex-1 border rounded p-2" placeholder="Ex.: Paragem no Miradouro" value="${value}">
+            <input type="text" name="itinerario[]" class="flex-1 border rounded p-2" placeholder="Ex.: Paragem ao Miradouro" value="${value}">
             <button type="button" class="remove-etapa px-3 py-2 bg-red-100 text-red-700 rounded">Remover</button>
         `;
             return row;
         }
 
+        function createRowIncluida(value = '') {
+            const rowInclu = document.createElement('div');
+            rowInclu.className = 'flex items-center gap-2';
+            rowInclu.innerHTML = `
+            <input type="text" name="incluido[]" class="flex-1 border rounded p-2" placeholder="Ex.: Refeições incluídas" value="${value}">
+            <button type="button" class="remove-etapa-incluida px-3 py-2 bg-red-100 text-red-700 rounded">Remover</button>
+        `;
+            return rowInclu;
+        }
+
+        //Bpotão para add etapas
         addBtn?.addEventListener('click', () => {
             wrapper.appendChild(createRow(''));
+        });
+
+        //Botão para add itens incluídos
+        addBtnIncluida?.addEventListener('click', () => {
+            Incluido_wrapper.appendChild(createRowIncluida(''));
         });
 
         wrapper.addEventListener('click', (e) => {
@@ -132,6 +178,18 @@ if (!is_array($itensItinerario)) { $itensItinerario = []; }
                     row.remove();
                 } else {
                     row.querySelector('input').value = '';
+                }
+            }
+        });
+
+        Incluido_wrapper.addEventListener('click', (e) => {
+            if (e.target?.classList.contains('remove-etapa-incluida')) {
+                const rowInclu = e.target.closest('.flex.items-center');
+                // Se ficar sem nenhuma linha, mantém pelo menos uma
+                if (Incluido_wrapper.children.length > 1) {
+                    rowInclu.remove();
+                } else {
+                    rowInclu.querySelector('input').value = '';
                 }
             }
         });
