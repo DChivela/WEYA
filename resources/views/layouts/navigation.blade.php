@@ -54,7 +54,7 @@
 
 
             </div>
-<!--
+            <!--
 ██████╗  ██████╗██╗  ██╗██╗██╗   ██╗███████╗██╗      █████╗
 ██╔══██╗██╔════╝██║  ██║██║██║   ██║██╔════╝██║     ██╔══██╗
 ██║  ██║██║     ███████║██║██║   ██║█████╗  ██║     ███████║
@@ -144,9 +144,11 @@
         </div>
     </div>
 </nav>
+
+
 <!-- Caixa de interação do Assistente Turístico (com toggle minimizar) -->
 <div id="ai-widget"
-     style="position:fixed;right:20px;bottom:20px;width:320px;background:#fff;padding:12px;border-radius:12px;
+    style="position:fixed;right:20px;bottom:20px;width:320px;background:#fff;padding:12px;border-radius:12px;
             box-shadow:0 10px 30px rgba(0,0,0,0.14);z-index:9999;font-family:sans-serif;transition:all .25s ease;">
     <!-- Header com título + botão minimizar -->
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
@@ -155,12 +157,12 @@
         <div style="display:flex;gap:8px;align-items:center;">
             <!-- Botão minimizar/fechar para desktop -->
             <button id="ai-toggle" aria-expanded="true"
-                    style="background:transparent;border:none;cursor:pointer;padding:6px;border-radius:6px;"
-                    title="Minimizar/Restaurar">
+                style="background:transparent;border:none;cursor:pointer;padding:6px;border-radius:6px;"
+                title="Minimizar/Restaurar">
                 <!-- simples ícone (pode trocar por svg) -->
                 <svg id="ai-toggle-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
-                    <path d="M6 9L12 3L18 9" stroke="#374151" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M6 15L12 21L18 15" stroke="#374151" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6 9L12 3L18 9" stroke="#374151" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M6 15L12 21L18 15" stroke="#374151" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
             </button>
         </div>
@@ -169,10 +171,10 @@
     <!-- Conteúdo principal (history + input) -->
     <div id="ai-body">
         <div id="ai-history"
-             style="height:200px;overflow-y:auto;border:1px solid #eee;padding:10px;border-radius:6px;background:#fbfbfb;"></div>
+            style="height:200px;overflow-y:auto;border:1px solid #eee;padding:10px;border-radius:6px;background:#fbfbfb;"></div>
 
         <textarea id="ai-q" rows="3" style="width:100%;margin-top:8px;padding:8px;border-radius:6px;border:1px solid #e6e6e6;"
-                  placeholder="Escreve a tua pergunta aqui..."></textarea>
+            placeholder="Escreve a tua pergunta aqui..."></textarea>
         <button id="ai-send" style="width:100%;margin-top:8px;padding:8px;border-radius:6px;background:#0b6fbd;color:#fff;border:none;cursor:pointer;">
             Perguntar
         </button>
@@ -189,285 +191,305 @@
 
 <!-- MINI BOTÃO Quando compacto -->
 <button id="ai-mini" aria-hidden="true" class="ai-mini" type="button">
-  <img src="{{ asset('assets/logo/Logo_Vakwetu.png') }}" alt="Assistente" class="ai-mini__img">
-  <!-- Title overlay (visible apenas no modo 'title') -->
-  <div class="ai-mini__title">O seu assistente!</div>
+    <img src="{{ asset('assets/logo/Logo_Vakwetu.png') }}" alt="Assistente" class="ai-mini__img">
+    <!-- Title overlay (visible apenas no modo 'title') -->
+    <div class="ai-mini__title">O seu assistente!</div>
 
-  <!-- seta apontando para o widget (SVG) -->
-  <svg class="ai-mini__arrow" viewBox="0 0 24 24" width="34" height="24" aria-hidden>
-    <path d="M12 2 L12 18" stroke="rgba(11,111,189,0.95)" stroke-width="1.6" stroke-linecap="round"/>
-    <path d="M5 11 L12 18 L19 11" fill="rgba(11,111,189,0.95)"></path>
-  </svg>
+    <!-- seta apontando para o widget (SVG) -->
+    <svg class="ai-mini__arrow" viewBox="0 0 24 24" width="34" height="24" aria-hidden>
+        <path d="M12 2 L12 18" stroke="rgba(11,111,189,0.95)" stroke-width="1.6" stroke-linecap="round" />
+        <path d="M5 11 L12 18 L19 11" fill="rgba(11,111,189,0.95)"></path>
+    </svg>
 
-  <!-- pulsação (visível apenas no modo 'pulse') -->
-  <span class="ai-mini__pulse ai-mini__pulse--one"></span>
-  <span class="ai-mini__pulse ai-mini__pulse--two"></span>
+    <!-- pulsação (visível apenas no modo 'pulse') -->
+    <span class="ai-mini__pulse ai-mini__pulse--one"></span>
+    <span class="ai-mini__pulse ai-mini__pulse--two"></span>
 </button>
 
 {{-- Estilos do mini botão --}}
 <style>
-/* Base do mini botão */
-.ai-mini{
-  position:fixed;
-  right:20px;
-  bottom:20px;
-  width:72px;
-  height:72px;
-  border-radius:14px;
-  border:none;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:8px;
-  gap:6px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.18);
-  z-index:9998;
-  cursor:pointer;
-  background:#fff;
-  overflow:visible;
-  transition:transform .22s ease, box-shadow .22s ease, opacity .2s;
-}
+    /* Base do mini botão */
+    .ai-mini {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        width: 72px;
+        height: 72px;
+        border-radius: 14px;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+        gap: 6px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+        z-index: 9998;
+        cursor: pointer;
+        background: #fff;
+        overflow: visible;
+        transition: transform .22s ease, box-shadow .22s ease, opacity .2s;
+    }
 
-/* imagem */
-.ai-mini__img{
-  width:50px;
-  height:50px;
-  object-fit:cover;
-  border-radius:8px;
-  flex-shrink:0;
-  box-shadow:0 2px 6px rgba(0,0,0,0.12);
-  z-index: 2;              /* <- adicionado: imagem acima das pulses */
-  position: relative;
-}
+    /* imagem */
+    .ai-mini__img {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 8px;
+        flex-shrink: 0;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+        z-index: 2;
+        /* <- adicionado: imagem acima das pulses */
+        position: relative;
+    }
 
 
-/* título sobre a imagem (posição absoluta dentro do botão) */
-.ai-mini__title{
-  position:absolute;
-  top:-38px;               /* fica por cima da imagem */
-  right:0;
-  left:0;
-  margin:auto;
-  width:max-content;
-  min-width:120px;
-  max-width:210px;
-  text-align:center;
-  font-size:12px;
-  font-weight:700;
-  color:#0b6fbd;
-  background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(249,249,249,0.95));
-  border-radius:8px;
-  padding:6px 8px;
-  box-shadow:0 6px 18px rgba(11,111,189,0.06);
-  pointer-events:none;
-  line-height:1.05;
-  transform-origin:center bottom;
-  transform:translateY(0);
-}
+    /* título sobre a imagem (posição absoluta dentro do botão) */
+    .ai-mini__title {
+        position: absolute;
+        top: -38px; /* fica por cima da imagem */
+        right: 0;
+        left: -30px;
+        margin: auto;
+        width: max-content;
+        min-width: 120px;
+        max-width: 210px;
+        text-align: center;
+        font-size: 12px;
+        font-weight: 700;
+        color: #0b6fbd;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(249, 249, 249, 0.95));
+        border-radius: 8px;
+        padding: 6px 8px;
+        box-shadow: 0 6px 18px rgba(11, 111, 189, 0.06);
+        pointer-events: none;
+        line-height: 1.05;
+        transform-origin: center bottom;
+        transform: translateY(0);
+    }
 
-/* seta SVG — posicionada entre o título e o botão (apontando para baixo) */
-.ai-mini__arrow{
-  position:absolute;
-  top:-8px;
-  right:calc(50% - 16px);
-  transform:translateX(0);
-  pointer-events:none;
-  opacity:0.95;
-}
+    /* seta SVG — posicionada entre o título e o botão (apontando para baixo) */
+    .ai-mini__arrow {
+        position: absolute;
+        top: -8px;
+        right: calc(50% - 16px);
+        transform: translateX(0);
+        pointer-events: none;
+        opacity: 0.95;
+    }
 
-/* Pulsação elegante (ondas) — camadas com animação */
-.ai-mini__pulse{
-  position:absolute;
-  width:72px;
-  height:72px;
-  border-radius:14px;
-  left:0;
-  top:0;
-  box-sizing:border-box;
-  pointer-events:none;
-  transform-origin:center center;
-  opacity:0;
-  border:1px solid rgba(11,111,189,0.12);
-  z-index: 0;              /* <- alterado: garantir que pulses fiquem atrás da imagem */
-}
-.ai-mini__pulse--one{
-  animation:aiPulse 2.4s ease-out infinite;
-}
-.ai-mini__pulse--two{
-  animation:aiPulse 2.4s ease-out infinite 1.1s;
-}
+    /* Pulsação elegante (ondas) — camadas com animação */
+    .ai-mini__pulse {
+        position: absolute;
+        width: 72px;
+        height: 72px;
+        border-radius: 14px;
+        left: 0;
+        top: 0;
+        box-sizing: border-box;
+        pointer-events: none;
+        transform-origin: center center;
+        opacity: 0;
+        border: 1px solid rgba(11, 111, 189, 0.12);
+        z-index: 0;
+        /* <- alterado: garantir que pulses fiquem atrás da imagem */
+    }
 
-/* pulso keyframes */
-@keyframes aiPulse{
-  0%{
-    transform:scale(0.85);
-    opacity:0.28;
-    filter:blur(0);
-  }
-  60%{
-    transform:scale(1.25);
-    opacity:0.06;
-    filter:blur(0.6px);
-  }
-  100%{
-    transform:scale(1.6);
-    opacity:0;
-    filter:blur(1.2px);
-  }
-}
+    .ai-mini__pulse--one {
+        animation: aiPulse 2.4s ease-out infinite;
+    }
 
-/* quando escondido ou não mostrar título/pulse — as classes serão controladas via JS */
-.ai-mini--hidden{ display:none !important; }
+    .ai-mini__pulse--two {
+        animation: aiPulse 2.4s ease-out infinite 1.1s;
+    }
 
-/* visual menor para mobile (ajusta automaticamente no script também) */
-@media (max-width:420px){
-  .ai-mini{ right:12px; bottom:12px; width:64px; height:64px; border-radius:12px; }
-  .ai-mini__img{ width:36px; height:36px; }
-  .ai-mini__title{ top:-30px; min-width:110px; font-size:11px; }
-  .ai-mini__arrow{ top:-6px; right:calc(50% - 16px); }
-}
+    /* pulso keyframes */
+    @keyframes aiPulse {
+        0% {
+            transform: scale(0.85);
+            opacity: 0.28;
+            filter: blur(0);
+        }
+
+        60% {
+            transform: scale(1.25);
+            opacity: 0.06;
+            filter: blur(0.6px);
+        }
+
+        100% {
+            transform: scale(1.6);
+            opacity: 0;
+            filter: blur(1.2px);
+        }
+    }
+
+    /* quando escondido ou não mostrar título/pulse — as classes serão controladas via JS */
+    .ai-mini--hidden {
+        display: none !important;
+    }
+
+    /* visual menor para mobile (ajusta automaticamente no script também) */
+    @media (max-width:420px) {
+        .ai-mini {
+            right: 12px;
+            bottom: 12px;
+            width: 64px;
+            height: 64px;
+            border-radius: 12px;
+        }
+
+        .ai-mini__img {
+            width: 36px;
+            height: 36px;
+        }
+
+        .ai-mini__title {
+            top: -30px;
+            min-width: 110px;
+            font-size: 11px;
+        }
+
+        .ai-mini__arrow {
+            top: -6px;
+            right: calc(50% - 16px);
+        }
+    }
 </style>
 
 {{-- Para minimizar a conversar com o assistente --}}
 <script>
-(function(){
-    const widget = document.getElementById('ai-widget');
-    const body = document.getElementById('ai-body');
-    const toggleBtn = document.getElementById('ai-toggle');
-    const miniBtn = document.getElementById('ai-mini');
+    (function() {
+        const widget = document.getElementById('ai-widget');
+        const body = document.getElementById('ai-body');
+        const toggleBtn = document.getElementById('ai-toggle');
+        const miniBtn = document.getElementById('ai-mini');
 
-    const historyDiv = document.getElementById('ai-history');
-    const inputEl = document.getElementById('ai-q');
+        const historyDiv = document.getElementById('ai-history');
+        const inputEl = document.getElementById('ai-q');
 
-    // enviar (mantive teu fetch)
-    document.getElementById('ai-send').addEventListener('click', async () => {
-        const q = inputEl.value.trim();
-        if (!q) return alert('Escreve a pergunta');
+        // enviar (mantive teu fetch)
+        document.getElementById('ai-send').addEventListener('click', async () => {
+            const q = inputEl.value.trim();
+            if (!q) return alert('Escreve a pergunta');
 
-        const userMsg = document.createElement('div');
-        userMsg.style.fontWeight = '700';
-        userMsg.style.color = '#0b5aa6';
-        userMsg.style.marginBottom = '6px';
-        userMsg.textContent = "Tu: " + q;
-        historyDiv.appendChild(userMsg);
+            const userMsg = document.createElement('div');
+            userMsg.style.fontWeight = '700';
+            userMsg.style.color = '#0b5aa6';
+            userMsg.style.marginBottom = '6px';
+            userMsg.textContent = "Tu: " + q;
+            historyDiv.appendChild(userMsg);
 
-        const loadingMsg = document.createElement('div');
-        loadingMsg.style.color = '#333';
-        loadingMsg.style.marginBottom = '8px';
-        loadingMsg.textContent = "Assistente: A processar...";
-        historyDiv.appendChild(loadingMsg);
-        historyDiv.scrollTop = historyDiv.scrollHeight;
-
-        inputEl.value = '';
-
-        try {
-            const resp = await fetch('/ai/query', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                },
-                body: JSON.stringify({ q })
-            });
-
-            const data = await resp.json();
-
-            loadingMsg.textContent = data && typeof data.answer === 'string' ?
-                "Assistente: " + data.answer :
-                "Erro: resposta inválida";
-
+            const loadingMsg = document.createElement('div');
+            loadingMsg.style.color = '#333';
+            loadingMsg.style.marginBottom = '8px';
+            loadingMsg.textContent = "Assistente: A processar...";
+            historyDiv.appendChild(loadingMsg);
             historyDiv.scrollTop = historyDiv.scrollHeight;
 
-        } catch (err) {
-            loadingMsg.textContent = 'Erro ao contactar o servidor: ' + err.message;
-            historyDiv.scrollTop = historyDiv.scrollHeight;
+            inputEl.value = '';
+
+            try {
+                const resp = await fetch('/ai/query', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify({
+                        q
+                    })
+                });
+
+                const data = await resp.json();
+
+                loadingMsg.textContent = data && typeof data.answer === 'string' ?
+                    "Assistente: " + data.answer :
+                    "Erro: resposta inválida";
+
+                historyDiv.scrollTop = historyDiv.scrollHeight;
+
+            } catch (err) {
+                loadingMsg.textContent = 'Erro ao contactar o servidor: ' + err.message;
+                historyDiv.scrollTop = historyDiv.scrollHeight;
+            }
+        });
+
+        // estado persistente
+        const STATE_KEY = 'ai-widget-collapsed';
+
+        function isCollapsed() {
+            return localStorage.getItem(STATE_KEY) === '1';
         }
-    });
 
-    // estado persistente
-    const STATE_KEY = 'ai-widget-collapsed';
-    function isCollapsed() { return localStorage.getItem(STATE_KEY) === '1'; }
-    function setCollapsed(val) { localStorage.setItem(STATE_KEY, val ? '1' : '0'); }
-
-    // aplicar estado UI
-    function applyState() {
-        if (isCollapsed()) {
-            // mostra mini botão e esconde widget (mas posiciona histórico/textarea ocultos)
-            widget.style.transform = 'translateY(20px)';
-            widget.style.opacity = '0';
-            widget.style.pointerEvents = 'none';
-            miniBtn.style.display = 'block';
-            miniBtn.setAttribute('aria-hidden', 'false');
-            toggleBtn.setAttribute('aria-expanded', 'false');
-        } else {
-            widget.style.transform = 'translateY(0)';
-            widget.style.opacity = '1';
-            widget.style.pointerEvents = 'auto';
-            miniBtn.style.display = 'none';
-            miniBtn.setAttribute('aria-hidden', 'true');
-            toggleBtn.setAttribute('aria-expanded', 'true');
+        function setCollapsed(val) {
+            localStorage.setItem(STATE_KEY, val ? '1' : '0');
         }
-    }
 
-    // toggle a partir do header
-    toggleBtn.addEventListener('click', () => {
-        const next = !isCollapsed();
-        setCollapsed(next);
+        // aplicar estado UI
+        function applyState() {
+            if (isCollapsed()) {
+                // mostra mini botão e esconde widget (mas posiciona histórico/textarea ocultos)
+                widget.style.transform = 'translateY(20px)';
+                widget.style.opacity = '0';
+                widget.style.pointerEvents = 'none';
+                miniBtn.style.display = 'block';
+                miniBtn.setAttribute('aria-hidden', 'false');
+                toggleBtn.setAttribute('aria-expanded', 'false');
+            } else {
+                widget.style.transform = 'translateY(0)';
+                widget.style.opacity = '1';
+                widget.style.pointerEvents = 'auto';
+                miniBtn.style.display = 'none';
+                miniBtn.setAttribute('aria-hidden', 'true');
+                toggleBtn.setAttribute('aria-expanded', 'true');
+            }
+        }
+
+        // toggle a partir do header
+        toggleBtn.addEventListener('click', () => {
+            const next = !isCollapsed();
+            setCollapsed(next);
+            applyState();
+        });
+
+        // abrir clicando no mini botão
+        miniBtn.addEventListener('click', () => {
+            setCollapsed(false);
+            applyState();
+            // foco no input
+            setTimeout(() => inputEl.focus(), 120);
+        });
+
+        // atalhos de teclado: Enter/Space no toggle
+        toggleBtn.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') toggleBtn.click();
+        });
+        miniBtn.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') miniBtn.click();
+        });
+
+        // inicia com estado salvo
         applyState();
-    });
 
-    // abrir clicando no mini botão
-    miniBtn.addEventListener('click', () => {
-        setCollapsed(false);
-        applyState();
-        // foco no input
-        setTimeout(() => inputEl.focus(), 120);
-    });
-
-    // atalhos de teclado: Enter/Space no toggle
-    toggleBtn.addEventListener('keyup', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') toggleBtn.click();
-    });
-    miniBtn.addEventListener('keyup', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') miniBtn.click();
-    });
-
-    // inicia com estado salvo
-    applyState();
-
-    // se o widget estiver a cobrir muito em mobile: reduzir largura automaticamente
-    function responsiveAdjust() {
-        if (window.innerWidth < 420) {
-            widget.style.right = '12px';
-            widget.style.bottom = '12px';
-            widget.style.width = '92%';
-        } else {
-            widget.style.right = '20px';
-            widget.style.bottom = '20px';
-            widget.style.width = '320px';
+        // se o widget estiver a cobrir muito em mobile: reduzir largura automaticamente
+        function responsiveAdjust() {
+            if (window.innerWidth < 420) {
+                widget.style.right = '12px';
+                widget.style.bottom = '12px';
+                widget.style.width = '92%';
+            } else {
+                widget.style.right = '20px';
+                widget.style.bottom = '20px';
+                widget.style.width = '320px';
+            }
         }
-    }
-    window.addEventListener('resize', responsiveAdjust);
-    responsiveAdjust();
+        window.addEventListener('resize', responsiveAdjust);
+        responsiveAdjust();
 
-})();
+    })();
 </script>
 
-<script>
-/*
-  MINI_MODE: 'title' -> mostra o título + seta
-             'pulse' -> mostra efeito de ondas
-  Altera aqui para escolher comportamento.
-*/
-const MINI_MODE = 'title'; // ou 'pulse'
-
-(function(){
-  const miniBtn = document.getElementById('ai-mini');
-  const STATE_KEY = 'ai-widget-collapsed';
-
-
-})();
-</script>
 
 {{-- Responsável pelo toggle do tema claro/escuro --}}
 <script>

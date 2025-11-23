@@ -72,7 +72,7 @@
                                         </span>
 
                                         <div class="flex flex-col text-sm text-right mt-6 space-y-1">
-                                            <a href="{{ route('pacotes.show', $pacote) }}" class="text-blue-600"><i class="bi bi-eye text-xl"></i></a>
+                                            <a href="{{ route('pacotes.show', $pacote) }}" class="text-blue-600"><i class="bi bi-eye text-3xl"></i></a>
 
                                             @auth
                                             @if (auth()->user()->perfil === 'admin')
