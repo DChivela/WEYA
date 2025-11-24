@@ -43,9 +43,9 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 hover:shadow-xl transition">
             <div class="text-blue-500 text-3xl mb-3">🚖</div>
-            <h4 class="font-semibold text-lg dark:text-gray-100">Minhas Corridas</h4>
-            <p class="text-gray-500 dark:text-gray-100 text-sm">Consulta o histórico e acompanha as tuas viagens.</p>
-            <a href="{{ route('corridas.index') }}" class="mt-3 inline-block text-blue-600 hover:underline">Ver corridas</a>
+            <h4 class="font-semibold text-lg dark:text-gray-100">Vai um Passeio?</h4>
+            <p class="text-gray-500 dark:text-gray-100 text-sm">Monte o teu passeio personalizado pela Huíla.</p>
+            <a href="{{ route('passeios.tours') }}" class="mt-3 inline-block text-blue-600 hover:underline">Ver Tours</a>
         </div>
 
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 hover:shadow-xl transition">

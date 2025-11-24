@@ -25,7 +25,7 @@
 
         <!-- Perfil -->
         <div class="mt-4">
-            <x-input-label for="perfil" :value="__('Perfil')" />
+            {{--<x-input-label for="perfil" :value="__('Perfil')" />--}}
             <select id="perfil" name="perfil" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm">
                 <option value="turista" {{ old('perfil') == 'turista' ? 'selected' : '' }}>Turista</option>
 

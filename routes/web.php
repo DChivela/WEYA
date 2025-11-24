@@ -10,6 +10,7 @@ use App\Http\Controllers\AiController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\PacotesDestaque;
+use App\Http\Controllers\PasseiosController;
 use App\Http\Controllers\RestauranteController;
 use App\Services\GroqService;
 
@@ -40,6 +41,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('/promocoes', PromocaoController::class);
     Route::resource('/hoteis', HotelController::class);
     Route::resource('/restaurantes', RestauranteController::class);
+    Route::resource('/passeios', PasseiosController::class);
+    Route::get('/tours', [PasseiosController::class, 'tours'])->name( 'passeios.tours');
 });
 
 Route::post('/ai/query', [AiController::class, 'query']);
